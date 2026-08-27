@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sitka — Tuner &amp; Songwriting</title>
+<meta name="description" content="A guitar tuner that knows thirty tunings, and chord shapes ranked for whichever one you are actually in. Everything stays on your phone.">
+<link rel="icon" href="/assets/favicon.png">
+<meta property="og:title" content="Sitka — Tuner &amp; Songwriting">
+<meta property="og:description" content="Chord shapes ranked for your tuning — DADGAD, open G, or one you invent.">
+<meta property="og:image" content="https://sitkastrings.com/assets/icon.png">
+<meta property="og:url" content="https://sitkastrings.com/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;1,400;1,500&family=Poppins:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+  /* ---------------- hero ---------------- */
+  .hero {
+    background:
+      radial-gradient(120% 90% at 50% 0%, var(--green-lift) 0%, var(--green) 45%, var(--green-deep) 100%);
+    border-bottom: 1px solid var(--hair);
+    padding: clamp(3.5rem, 11vw, 7rem) 0 clamp(3rem, 8vw, 5rem);
+    text-align: center;
+  }
+  .mark {
+    width: clamp(104px, 26vw, 148px); height: auto; display: block;
+    margin: 0 auto clamp(1.5rem, 4vw, 2.25rem);
+  }
+  .wordmark {
+    font-family: 'Lora', Georgia, serif; font-style: italic; font-weight: 500;
+    font-size: clamp(2.6rem, 9vw, 3.8rem); line-height: 1;
+    margin: 0 0 .35rem; letter-spacing: .01em; color: var(--spruce);
+  }
+  .tagline {
+    font-family: 'Poppins', sans-serif; font-weight: 400;
+    font-size: .74rem; letter-spacing: .28em; text-transform: uppercase;
+    color: var(--copper); margin: 0 0 clamp(2rem, 6vw, 3rem);
+  }
+  .claim {
+    font-family: 'Lora', Georgia, serif; font-style: italic; font-weight: 400;
+    font-size: clamp(1.35rem, 4.6vw, 1.85rem); line-height: 1.35;
+    color: var(--spruce); margin: 0 auto 1.1rem; max-width: 26rem;
+    text-wrap: balance;
+  }
+  .claim em { font-style: normal; color: var(--copper-lit); }
+  .sub { color: var(--spruce-dim); margin: 0 auto; max-width: 27rem; }
+
+  .badge {
+    display: inline-block; margin-top: clamp(2rem, 5vw, 2.75rem);
+    font-family: 'Poppins', sans-serif; font-weight: 400;
+    font-size: .7rem; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--patina);
+    border: 1px solid var(--hair); border-radius: 999px;
+    padding: .55rem 1.15rem;
+  }
+
+  /* ---------------- sections ---------------- */
+  main { padding: clamp(3rem, 9vw, 5.5rem) 0 0; }
+  .feature { padding-bottom: clamp(3rem, 9vw, 5rem); }
+  .feature + .feature { border-top: 1px solid var(--hair); padding-top: clamp(3rem, 9vw, 5rem); }
+
+  .feature h2 {
+    font-family: 'Lora', Georgia, serif; font-style: italic; font-weight: 500;
+    font-size: clamp(1.5rem, 5vw, 2rem); line-height: 1.2;
+    margin: 0 0 1rem; color: var(--spruce); text-wrap: balance;
+  }
+  .feature p { margin: 0 0 1rem; color: var(--spruce-dim); }
+  .feature p:last-child { margin-bottom: 0; }
+  .feature strong { font-weight: 500; color: var(--spruce); }
+
+  /* the tunings read as data, not prose */
+  .tunings {
+    display: flex; flex-wrap: wrap; gap: .45rem;
+    margin: 1.5rem 0 0; padding: 0; list-style: none;
+  }
+  .tunings li {
+    font-family: 'Poppins', sans-serif; font-size: .72rem; font-weight: 400;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: var(--patina);
+    border: 1px solid var(--hair); border-radius: 2px;
+    padding: .35rem .7rem;
+  }
+  .tunings li.more { border-style: dashed; color: var(--copper); }
+
+  /* the one lifted panel on the page, for the claim that matters most */
+  .quiet {
+    background: var(--green);
+    border: 1px solid var(--hair);
+    border-radius: 3px;
+    padding: clamp(1.5rem, 5vw, 2.25rem);
+    margin-top: 1.5rem;
+  }
+  .quiet ul { margin: 0; padding-left: 1.1rem; color: var(--spruce-dim); }
+  .quiet li { margin-bottom: .45rem; }
+  .quiet li:last-child { margin-bottom: 0; }
+
+  .after-panel { margin-top: 1.25rem; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <img class="mark" src="/assets/mark.png" alt="The Sitka mark: a tuning fork" width="1024" height="1024">
+    <h1 class="wordmark">Sitka</h1>
+    <p class="tagline">Tuner &amp; Songwriting</p>
+
+    <p class="claim">Most chord apps know one tuning. Sitka knows <em>thirty</em>.</p>
+    <p class="sub">
+      Retune to DADGAD and a standard-tuning chord chart quietly becomes
+      wrong — every shape in it. Sitka follows you there.
+    </p>
+
+    <p class="badge">Coming soon to Google Play</p>
+  </div>
+</header>
+
+<main>
+  <section class="feature wrap">
+    <p class="eyebrow">Chord voicings</p>
+    <h2>Shapes for the tuning you are actually in</h2>
+    <p>
+      Sitka generates chord shapes for whatever tuning is selected, ranks
+      them by how playable they are, and puts the ones worth learning
+      first. It searches the fretboard rather than looking anything up, so
+      there is no such thing as a tuning it has no chart for.
+    </p>
+    <p>
+      Invent one a semitone at a time and that works too — the tuner and
+      the chord shapes both follow you into it.
+    </p>
+    <ul class="tunings">
+      <li>Standard</li><li>Drop D</li><li>DADGAD</li><li>Open G</li>
+      <li>Open D</li><li>Open C</li><li>Modal</li><li>Slack key</li>
+      <li class="more">30 in all</li>
+    </ul>
+  </section>
+
+  <section class="feature wrap">
+    <p class="eyebrow">The tuner</p>
+    <h2>Built to be right, not to look busy</h2>
+    <p>
+      Pitch detection on the YIN algorithm, verified against reference
+      tones. It reads a low E as a low E instead of flipping an octave,
+      stays quiet between plucks in a noisy room, and reads the sample
+      rate from your phone's hardware rather than assuming it — the
+      shortcut that leaves some tuners consistently sharp on some phones.
+    </p>
+    <p>
+      Play the guitar and it will capture the tuning you have already
+      found by ear, string by string.
+    </p>
+  </section>
+
+  <section class="feature wrap">
+    <p class="eyebrow">Songwriting</p>
+    <h2>Somewhere to put the song</h2>
+    <p>
+      A writing side that knows what key you are in: diatonic chords with
+      roman numerals, borrowed chords when you want the surprise, and a
+      rhyme dictionary that ranks by sound rather than spelling. Chords sit
+      above the words, where you put them.
+    </p>
+    <p>Export as ChordPro or plain text, whenever you like.</p>
+  </section>
+
+  <section class="feature wrap">
+    <p class="eyebrow">Also inside</p>
+    <h2>A metronome, and a trainer for your ear</h2>
+    <p>
+      A metronome with meters and subdivisions. And a vocal trainer that
+      reports <strong>three numbers rather than one</strong> — how long you
+      held the note, whether you sat sharp or flat, and how long you took
+      to find it — because those are three different problems with three
+      different fixes.
+    </p>
+    <p>
+      It builds every exercise inside the range you gave it and never
+      above it.
+    </p>
+  </section>
+
+  <section class="feature wrap">
+    <p class="eyebrow">Privacy</p>
+    <h2>It stays on your phone</h2>
+    <p>
+      This is not a promise about our intentions. It is a property of how
+      the app is built.
+    </p>
+    <div class="quiet">
+      <ul>
+        <li>No account, and nothing to sign up for.</li>
+        <li>No analytics, no ads, no tracking of any kind.</li>
+        <li>
+          <strong>The Google Play build ships without internet
+          permission</strong> — it cannot make a network connection at all.
+        </li>
+        <li>
+          The microphone is used to measure pitch. Audio is analysed as it
+          arrives and discarded; nothing is recorded and nothing is stored.
+        </li>
+        <li>
+          Your songs, tunings and practice history are saved only on your
+          device, and are not copied into any cloud backup.
+        </li>
+      </ul>
+    </div>
+    <p class="after-panel">
+      The full <a href="/privacy/">privacy policy</a> is short, and says the
+      same thing at greater length.
+    </p>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <nav>
+      <a href="/privacy/">Privacy</a>
+    </nav>
+    <p>Sitka is named for Sitka spruce, the wood most acoustic soundboards are made from.</p>
+    <p>&copy; 2026 Sitka</p>
+  </div>
+</footer>
+
+</body>
+</html>

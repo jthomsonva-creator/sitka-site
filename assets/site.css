@@ -1,0 +1,63 @@
+/*
+ * site.css — everything both pages share.
+ *
+ * One committed visual world: the deep green of the app icon and the
+ * splash, with Sitka's own copper and spruce on top. Every colour is
+ * painted explicitly; nothing is inherited from a host background.
+ */
+
+:root {
+  --green-deep:  #071F1A;
+  --green:       #0D3D32;
+  --green-lift:  #10493C;
+  --hair:        #1C5949;
+
+  --spruce:      #F0F4E2;
+  --spruce-dim:  #C8D2B4;
+  --patina:      #8AA08D;
+
+  --copper:      #C88B4E;
+  --copper-lit:  #E0A464;
+
+  --measure:     34rem;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation: none !important; transition: none !important; }
+}
+
+body {
+  margin: 0;
+  background: var(--green-deep);
+  color: var(--spruce);
+  font-family: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--copper-lit); text-underline-offset: 3px; }
+a:hover { color: var(--spruce); }
+a:focus-visible { outline: 2px solid var(--copper-lit); outline-offset: 3px; border-radius: 2px; }
+
+.wrap { max-width: var(--measure); margin: 0 auto; padding: 0 1.4rem; }
+
+.eyebrow {
+  font-family: 'Poppins', sans-serif; font-weight: 500;
+  font-size: .68rem; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--copper); margin: 0 0 .7rem;
+}
+
+footer {
+  border-top: 1px solid var(--hair);
+  padding: clamp(2.5rem, 7vw, 3.5rem) 0 clamp(3rem, 8vw, 4rem);
+  text-align: center;
+}
+footer p { margin: 0 0 .6rem; color: var(--patina); font-size: .875rem; }
+footer nav { margin-bottom: 1.25rem; }
+footer nav a { margin: 0 .6rem; font-size: .875rem; }
