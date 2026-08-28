@@ -61,3 +61,121 @@ footer {
 footer p { margin: 0 0 .6rem; color: var(--patina); font-size: .875rem; }
 footer nav { margin-bottom: 1.25rem; }
 footer nav a { margin: 0 .6rem; font-size: .875rem; }
+
+/* ------------------------------------------------------------------ */
+/* The mark as a motif                                                 */
+/* ------------------------------------------------------------------ */
+
+/*
+ * One asset, four jobs: hero, watermark, section divider, list bullet.
+ * All of them reference assets/mark.png rather than a hand-drawn SVG
+ * copy, so the motif cannot drift away from the real icon when the icon
+ * is next redrawn.
+ */
+
+/* a divider that is a mark flanked by hairlines, replacing a plain rule */
+.divider {
+  display: flex; align-items: center; gap: 1.1rem;
+  margin: 0; padding: 0; border: 0;
+}
+.divider::before, .divider::after {
+  content: ""; flex: 1; height: 1px; background: var(--hair);
+}
+.divider span {
+  width: 22px; height: 22px; flex: none;
+  background: url("/assets/mark.png") center / contain no-repeat;
+  opacity: .55;
+}
+
+/* list bullets carrying the mark instead of a disc */
+.mark-list { list-style: none; margin: 0; padding: 0; }
+.mark-list li {
+  position: relative; padding-left: 2rem; margin-bottom: .7rem;
+  color: var(--spruce-dim);
+}
+.mark-list li:last-child { margin-bottom: 0; }
+.mark-list li::before {
+  content: ""; position: absolute; left: 0; top: .38em;
+  width: 15px; height: 15px;
+  background: url("/assets/mark.png") center / contain no-repeat;
+  opacity: .75;
+}
+
+/* ------------------------------------------------------------------ */
+/* Phone frames: deliberate placeholders, not broken images            */
+/* ------------------------------------------------------------------ */
+
+.shots {
+  display: grid; gap: 1.1rem;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  margin: 1.75rem 0 0;
+}
+.shot { display: flex; flex-direction: column; gap: .7rem; }
+
+/* the frame is drawn, never loaded — nothing here can fail to arrive */
+.phone {
+  aspect-ratio: 9 / 19.5;
+  border: 1px solid var(--hair);
+  border-radius: 14px;
+  background:
+    radial-gradient(120% 60% at 50% 0%, var(--green-lift) 0%, var(--green) 55%, var(--green) 100%);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.phone::before {              /* the earpiece slot, so it reads as a phone */
+  content: ""; position: absolute; top: 9px; left: 50%;
+  transform: translateX(-50%);
+  width: 28%; height: 4px; border-radius: 2px;
+  background: var(--hair);
+}
+.phone::after {               /* the mark, centred */
+  content: ""; width: 38%; aspect-ratio: 1;
+  background: url("/assets/mark.png") center / contain no-repeat;
+  opacity: .38;
+}
+.shot-label {
+  font-family: 'Poppins', sans-serif; font-size: .76rem; font-weight: 400;
+  color: var(--patina); text-align: center; line-height: 1.4;
+}
+
+/* ------------------------------------------------------------------ */
+/* Chord diagrams                                                      */
+/* ------------------------------------------------------------------ */
+
+.chords {
+  display: grid; gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  margin: 1.75rem 0 0;
+}
+.chord {
+  background: var(--green);
+  border: 1px solid var(--hair);
+  border-radius: 3px;
+  padding: 1.2rem 1rem 1rem;
+  text-align: center;
+}
+.chord h3 {
+  font-family: 'Poppins', sans-serif; font-weight: 500;
+  font-size: .7rem; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--copper); margin: 0 0 .15rem;
+}
+.chord .strings {
+  font-family: ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  font-size: .72rem; letter-spacing: .12em;
+  color: var(--patina); margin: 0 0 .9rem;
+}
+.chord svg { display: block; width: 100%; max-width: 148px; margin: 0 auto; height: auto; }
+.chord .shape {
+  font-family: ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  font-size: .8rem; color: var(--spruce); margin: .8rem 0 .1rem;
+  letter-spacing: .04em;
+}
+.chord .voiced {
+  font-family: 'Poppins', sans-serif; font-size: .72rem;
+  color: var(--patina); margin: 0;
+}
+.verdict {
+  margin: 1.5rem 0 0; text-align: center;
+  font-family: 'Lora', Georgia, serif; font-style: italic;
+  color: var(--spruce); font-size: 1.05rem;
+}
