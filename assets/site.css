@@ -179,3 +179,117 @@ footer nav a { margin: 0 .6rem; font-size: .875rem; }
   font-family: 'Lora', Georgia, serif; font-style: italic;
   color: var(--spruce); font-size: 1.05rem;
 }
+
+/* ------------------------------------------------------------------ */
+/* Wide sections: the diagrams break the reading measure               */
+/* ------------------------------------------------------------------ */
+
+/*
+ * Body copy wants ~34rem. Diagrams want room. `.wide` opts a section out
+ * of the measure without leaving the page, and its prose keeps a measure
+ * of its own so the words never run to 52rem.
+ */
+.wide { max-width: 52rem; margin: 0 auto; padding: 0 1.4rem; }
+.lede-wide { max-width: 34rem; }
+.wide .verdict { max-width: none; }
+
+/* ---------------- fretboards ---------------- */
+.fretrow, .rankrow {
+  display: grid; gap: 1rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 1.75rem 0 0;
+}
+.rankrow { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+@media (max-width: 720px) {
+  /* the Play pattern: one row, swipe it. scroll-snap so it lands square */
+  .fretrow, .rankrow {
+    display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
+    margin-inline: -1.4rem; padding: 0 1.4rem 0.5rem;
+    scrollbar-width: thin;
+  }
+  .fretrow > *, .rankrow > * { flex: 0 0 62%; scroll-snap-align: center; }
+}
+
+.fret, .rank-item {
+  background: var(--green); border: 1px solid var(--hair);
+  border-radius: 3px; padding: 1rem .75rem .9rem;
+  text-align: center; margin: 0; position: relative;
+}
+.fret figcaption { display: block; margin-bottom: .6rem; }
+.fret-name {
+  display: block; font-family: 'Poppins', sans-serif; font-weight: 500;
+  font-size: .74rem; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--copper);
+}
+.fret-strings {
+  display: block; font-family: ui-monospace, Menlo, monospace;
+  font-size: .68rem; letter-spacing: .1em; color: var(--patina); margin-top: .15rem;
+}
+.fret svg, .rank-item svg { display: block; width: 100%; max-width: 132px; height: auto; margin: 0 auto; }
+.fret-shape {
+  font-family: ui-monospace, Menlo, monospace; font-size: .76rem;
+  color: var(--spruce); margin: .7rem 0 .15rem; letter-spacing: .03em;
+}
+.fret-meta { font-size: .7rem; color: var(--patina); margin: 0 0 .35rem; }
+.fret-fingers { color: var(--copper-lit); }
+.fret-gloss {
+  font-family: 'Lora', Georgia, serif; font-style: italic;
+  font-size: .82rem; line-height: 1.4; color: var(--spruce-dim); margin: 0;
+}
+
+/* ---------------- the ranked three ---------------- */
+.rank-n {
+  position: absolute; top: .5rem; left: .6rem;
+  font-family: ui-monospace, Menlo, monospace; font-size: .7rem;
+  color: var(--copper); opacity: .8;
+}
+.rank-score { margin: .5rem 0 .2rem; font-size: .7rem; color: var(--patina); }
+.rank-score span {
+  font-family: ui-monospace, Menlo, monospace; font-size: 1.15rem;
+  color: var(--copper-lit); margin-right: .25rem;
+}
+
+/* ---------------- tuning families ---------------- */
+.families { margin: 1.75rem 0 0; display: flex; flex-direction: column; gap: 1rem; }
+.fam { display: grid; grid-template-columns: 11rem 1fr; gap: .3rem .9rem; align-items: center; }
+.fam-name {
+  margin: 0; font-family: 'Poppins', sans-serif; font-weight: 500;
+  font-size: .76rem; letter-spacing: .1em; text-transform: uppercase; color: var(--copper);
+}
+.fam-bar {
+  height: 22px; border-radius: 2px; position: relative;
+  background: linear-gradient(to right, var(--green-lift) var(--n), transparent var(--n));
+  border: 1px solid var(--hair);
+  display: flex; align-items: center;
+}
+.fam-count {
+  font-family: ui-monospace, Menlo, monospace; font-size: .72rem;
+  color: var(--spruce); padding-left: .55rem;
+}
+.fam-list {
+  grid-column: 2; margin: 0; font-size: .72rem; color: var(--patina); line-height: 1.5;
+}
+@media (max-width: 560px) {
+  .fam { grid-template-columns: 1fr; }
+  .fam-list { grid-column: 1; }
+}
+
+/* ---------------- the screenshot strip ---------------- */
+.shots {
+  list-style: none; margin: 1.75rem 0 0; padding: 0;
+  display: grid; gap: 1rem; grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.shots .shot { margin: 0; }
+.shots img {
+  display: block; width: 100%; height: auto;
+  border: 1px solid var(--hair); border-radius: 6px;
+  background: var(--green);
+}
+@media (max-width: 720px) {
+  .shots {
+    display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
+    margin-inline: -1.4rem; padding: 0 1.4rem .5rem; gap: .75rem;
+  }
+  .shots .shot { flex: 0 0 68%; scroll-snap-align: center; }
+}
