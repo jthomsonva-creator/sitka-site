@@ -44,8 +44,9 @@ Everything lives in `:root` in `assets/site.css`. The green is
 web page, the launcher icon and the splash screen are the same colour on
 purpose. Change it in one place and both pages follow.
 
-## Before launch
+## Images
 
-- Replace `REPLACE-WITH-CONTACT-EMAIL` in `privacy/index.html`.
-- Swap "Coming soon to Google Play" in `index.html` for the real badge
-  and store link once the listing is live.
+The six screens in `#screens` are `assets/screen-*.webp`, 1080x2400,
+from the store shoot on versionCode 27. `assets/og.png` (1200x630) is
+the link preview. Give every `<img>` its real `width` and `height` so the
+page does not shift as images load.
