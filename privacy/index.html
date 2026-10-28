@@ -43,7 +43,7 @@
   <a class="back" href="/">&larr; Sitka</a>
 
   <h1>Privacy Policy</h1>
-  <p class="updated">Last updated 27 August 2026</p>
+  <p class="updated">Last updated 28 October 2026</p>
 
   <p class="lede">
     Sitka is a guitar tuner and songwriting app. It has no accounts, no
@@ -60,9 +60,9 @@
     phone.
   </p>
   <p>
-    Sitka does make one network connection, and only one: Google Play,
-    to verify an in-app purchase. It carries nothing of yours. See
-    <a href="#network">Network access</a> below.
+    The only thing Sitka talks to is Google Play, about the one-time
+    unlock and the occasional rating prompt. None of it carries anything
+    of yours. See <a href="#network">Network access</a> below.
   </p>
 
   <h2>The microphone</h2>
@@ -71,7 +71,8 @@
     your voice. That is the only reason it asks for it.
   </p>
   <p>
-    Audio is analysed as it arrives and discarded immediately. Sitka does
+    Audio is analysed as it arrives and thrown away, never recorded or
+    stored. Sitka does
     not record audio, does not save audio to a file, and does not
     transmit audio anywhere. What survives a moment of listening is a
     pitch measurement — a number — and nothing else.
@@ -85,11 +86,15 @@
   <h2>What is stored on your phone</h2>
   <p>Sitka saves the following in its own private storage on your device:</p>
   <ul>
-    <li>songs, including lyrics, chords and section structure</li>
-    <li>your custom tuning, and which tuning is currently selected</li>
-    <li>vocal practice sessions: pitch scores and the dates you practised</li>
-    <li>your stored vocal range</li>
-    <li>settings, such as reference pitch and metronome preferences</li>
+    <li>songs and ideas, including lyrics, chords, capo, key, tempo and section structure</li>
+    <li>your custom tunings (up to 20), which tuning is selected, and the ones you used recently</li>
+    <li>My shapes, the chord shapes you save</li>
+    <li>the Explore stack, the shapes you are working with</li>
+    <li>your chord practice setup</li>
+    <li>your vocal range, and your vocal practice sessions: pitch scores and the dates you practised</li>
+    <li>settings, such as reference pitch, the chords capo, metronome and Perform preferences</li>
+    <li>whether you own the unlock, as Google Play last reported it, so the app can open without a network</li>
+    <li>for the rating prompt: how many days you have used the app, and when it last asked</li>
   </ul>
   <p>
     This lives in the app's private area, readable only by Sitka. It is
@@ -102,15 +107,16 @@
   <h2>Backing up your work</h2>
   <p>
     Because nothing is uploaded, a backup is something you make on
-    purpose. Setup &rarr; Backup writes one file holding your songs,
-    tunings, practice history and settings, and hands it to Android's
+    purpose. A backup file is made only when you tap Export: Setup
+    &rarr; Back up &amp; restore writes one file holding your songs,
+    tunings, My shapes, practice history and settings, and hands it to Android's
     share sheet — mail it to yourself, or keep it wherever you keep
     things. The same screen restores from that file. It is plain readable
     text, so you can open it and see exactly what is in it.
   </p>
   <p>
-    That file is the only copy of your work outside the app, and you
-    choose where it goes.
+    That file is the only copy of your work outside the app, and it goes
+    wherever you send it. It never contains the unlock.
   </p>
 
   <h2>Sharing a song</h2>
@@ -123,21 +129,27 @@
 
   <h2 id="network">Network access</h2>
   <p>
-    Sitka has one reason to use the network: <strong>in-app purchases,
-    which are handled by Google Play.</strong> When you buy something,
-    Google Play verifies the purchase. That exchange is between your
-    device and Google, who process the payment. There is no Sitka server
-    involved, because we do not run one.
+    Sitka has no servers, no account, no analytics and no ads.
+    <strong>The only thing it talks to is Google Play</strong>, in three
+    ways:
+  </p>
+  <ul>
+    <li>when the app opens, it asks Play whether you own the one-time
+      unlock;</li>
+    <li>it fetches the price when you look at the unlock, and Play handles
+      the purchase if you make one;</li>
+    <li>Play shows the occasional &lsquo;rate Sitka&rsquo; prompt, and
+      Setup&rsquo;s &ldquo;Rate Sitka&rdquo; opens the Play listing.</li>
+  </ul>
+  <p>
+    Each of those is between your device and Google. There is no Sitka
+    server involved, because we do not run one.
   </p>
   <p>
-    Nothing else leaves your device. Your songs, lyrics, tunings, vocal
-    range and practice history are never transmitted &mdash; not to us,
+    Nothing else leaves your device. Your songs, lyrics, tunings, shapes,
+    vocal range and practice history are never transmitted &mdash; not to us,
     not to Google, not to anyone. There is no analytics, no crash
     reporting, no advertising and no account.
-  </p>
-  <p>
-    If you never make a purchase, Sitka has no reason to open a
-    connection at all.
   </p>
 
   <h2>Children</h2>

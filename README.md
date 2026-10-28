@@ -25,10 +25,10 @@ requests a permission, and Sitka requests the microphone. The listing
 points at `https://sitkastrings.com/privacy`, so **that path has to keep
 working** — if the file moves, the store listing breaks.
 
-Its claims are not marketing copy. Each one was checked against a built
-release manifest: no `INTERNET` permission, `allowBackup="false"`,
-`RECORD_AUDIO` the only permission that survives the merge. If the app
-changes, the policy changes with it.
+Its claims are not marketing copy. Each one was checked against the app:
+`allowBackup="false"`, `RECORD_AUDIO` the one runtime permission, and
+Google Play (billing and the in-app review) the only network peer. If the
+app changes, the policy changes with it.
 
 ## `CNAME` is load-bearing
 

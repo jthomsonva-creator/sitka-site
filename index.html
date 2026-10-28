@@ -246,16 +246,16 @@
   -->
   <section class="feature wide" id="screens">
     <p class="eyebrow">Inside the app</p>
-    <h2>A tuner, a songbook, a vocal trainer and a metronome</h2>
+    <h2>A tuner, chords, a songbook, a vocal trainer and a metronome</h2>
     <p class="lede-wide">
-      Four tabs, and they know about each other &mdash; the tuning you pick
+      Five tabs, and they know about each other &mdash; the tuning you pick
       in one is the tuning the others work in.
     </p>
     <ul class="shots">
         <li class="shot">
           <img src="/assets/screenshot-1.png" alt="Sitka screenshot 1"
                width="1080" height="1920" decoding="async">
-          <p class="shot-note">The chord picker inside the song editor. Every chord in your key with a line on what it does to a progression, and the playable fingerings underneath, best first. Tap one to drop it into the line you are writing.</p>
+          <p class="shot-note">The chord picker inside the song editor. Every chord in your key with a line on what it does to a progression, and the best fingering for each underneath, free; the rest of the ranked list comes with the unlock. Tap one to drop it into the line you are writing.</p>
         </li>
         <li class="shot">
           <img src="/assets/screenshot-2.png" alt="Sitka screenshot 2"
@@ -299,12 +299,13 @@
       there is no such thing as a tuning it has no chart for.
     </p>
     <p>
-      Invent one a semitone at a time and that works too — the tuner and
-      the chord shapes both follow you into it.
+      With the one-time unlock, invent your own a semitone at a time —
+      up to 20 of them — and the tuner and the chord shapes both follow
+      you into it.
     </p>
     <ul class="tunings">
       <li>Standard</li><li>Drop D</li><li>DADGAD</li><li>Open G</li>
-      <li>Open D</li><li>Open C</li><li>Modal</li><li>Slack key</li>
+      <li>Open D</li><li>Open C</li><li>Modal</li>
       <li class="more">30 in all</li>
     </ul>
   </section>
@@ -394,8 +395,8 @@
       shortcut that leaves some tuners consistently sharp on some phones.
     </p>
     <p>
-      Play the guitar and it will capture the tuning you have already
-      found by ear, string by string.
+      With the unlock, play the guitar and it will capture the tuning you
+      have already found by ear, string by string.
     </p>
   </section>
 
@@ -458,7 +459,7 @@
           <p class="fam-list">All Fourths, New Standard</p>
         </div>
     </div>
-    <p class="verdict">And a custom one, a semitone at a time, if none of them is yours.</p>
+    <p class="verdict">And up to 20 of your own with the unlock, a semitone at a time, if none of them is yours.</p>
   </section>
 
   <div class="divider rule" role="separator"><span></span></div>
@@ -495,6 +496,40 @@
 
   <div class="divider rule" role="separator"><span></span></div>
 
+  <!--
+    What is free and what is in the unlock. Kept in step with GATED and
+    ALWAYS_FREE in the app's src/entitlement.ts; if either list changes,
+    this section changes with it. No price: Play localises it.
+  -->
+  <section class="feature wrap" id="pricing">
+    <p class="eyebrow">What it costs</p>
+    <h2>Free to use, one unlock if you want more</h2>
+    <div class="quiet">
+      <p><strong>Free</strong></p>
+      <ul class="mark-list">
+        <li>The tuner, and all 30 tunings.</li>
+        <li>The metronome.</li>
+        <li>Songwriting: Perform, capo, export and the rhyme dictionary.</li>
+        <li>Chord browsing, with the best shape for every chord.</li>
+        <li>Explore: fret any shape and Sitka names it, then strum it.</li>
+        <li>The voice tuner.</li>
+        <li>Backup and restore.</li>
+      </ul>
+    </div>
+    <div class="quiet">
+      <p><strong>One-time unlock, no subscription</strong></p>
+      <ul class="mark-list">
+        <li>Every ranked shape for every chord.</li>
+        <li>My shapes.</li>
+        <li>Custom and captured tunings, up to 20 of your own.</li>
+        <li>The full chord practice game.</li>
+        <li>Graded voice sessions.</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="divider rule" role="separator"><span></span></div>
+
   <section class="feature wrap">
     <p class="eyebrow">Privacy</p>
     <h2>It stays on your phone</h2>
@@ -504,20 +539,24 @@
     </p>
     <div class="quiet">
       <ul class="mark-list">
-        <li>No account, and nothing to sign up for.</li>
-        <li>No analytics, no ads, no tracking of any kind.</li>
+        <li>Sitka has no servers, no account, no analytics and no ads.</li>
         <li>
-          <strong>The only thing Sitka connects to is Google Play</strong>,
-          to verify an in-app purchase. There is no server of ours for it
-          to reach, because we do not run one.
+          <strong>The only thing it talks to is Google Play</strong>: when
+          the app opens it asks Play whether you own the one-time unlock, it
+          fetches the price when you look at the unlock, and Play shows the
+          occasional &lsquo;rate Sitka&rsquo; prompt.
         </li>
         <li>
-          The microphone is used to measure pitch. Audio is analysed as it
-          arrives and discarded; nothing is recorded and nothing is stored.
+          Audio is analysed as it arrives and thrown away, never recorded or
+          stored.
         </li>
         <li>
-          Your songs, tunings and practice history are saved only on your
-          device, never transmitted, and not copied into any cloud backup.
+          Your songs, tunings, shapes and practice history stay on your
+          phone, and are excluded from Android&rsquo;s cloud backup.
+        </li>
+        <li>
+          A backup file is made only when you tap Export, and it goes
+          wherever you send it.
         </li>
       </ul>
     </div>
@@ -531,7 +570,7 @@
     <a class="cta" href="https://play.google.com/store/apps/details?id=com.woodyb.sitka">Get it on Google Play</a>
     <p class="cta-note">
       Free — tuner, all thirty tunings, metronome and songwriting.
-      No subscription, no ads, no account.
+      One <a href="#pricing">optional unlock</a>; no subscription, no ads, no account.
     </p>
   </section>
 </main>
