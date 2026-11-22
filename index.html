@@ -54,7 +54,7 @@
   .tagline {
     font-family: 'Poppins', sans-serif; font-weight: 400;
     font-size: .74rem; letter-spacing: .28em; text-transform: uppercase;
-    color: var(--copper); margin: 0 0 clamp(2rem, 6vw, 3rem);
+    color: var(--copper-lit); margin: 0 0 clamp(2rem, 6vw, 3rem);
   }
   .claim {
     font-family: 'Lora', Georgia, serif; font-style: italic; font-weight: 400;
@@ -122,6 +122,58 @@
     margin-top: 1.5rem;
   }
   .after-panel { margin-top: 1.25rem; }
+  .hero .cta-note { color: var(--spruce-dim); } /* patina is 3.67:1 on the hero */
+  .cta-note.soon { margin-top: .3rem; }
+
+  /* ---------------- what's inside: one card per part of the app ---------------- */
+  .parts {
+    list-style: none; margin: 1.75rem 0 0; padding: 0;
+    display: grid; gap: 1rem; grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .part {
+    background: var(--green); border: 1px solid var(--hair); border-radius: 3px;
+    padding: 1.15rem 1.2rem 1.2rem;
+  }
+  .part h3 {
+    font-family: 'Poppins', sans-serif; font-weight: 500;
+    font-size: .74rem; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--copper-lit); margin: 0 0 .45rem;
+  }
+  .part p { margin: 0 0 .5rem; color: var(--spruce-dim); font-size: .92rem; line-height: 1.6; }
+  .part p:last-child { margin-bottom: 0; }
+  @media (max-width: 640px) { .parts { grid-template-columns: 1fr; } }
+
+  /* ---------------- pricing: three tiers ---------------- */
+  .tiers {
+    display: grid; gap: 1rem; grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: 1.75rem 0 0; align-items: stretch;
+  }
+  .tier {
+    background: var(--green); border: 1px solid var(--hair); border-radius: 3px;
+    padding: 1.3rem 1.2rem 1.35rem; display: flex; flex-direction: column;
+  }
+  .tier.later { border-style: dashed; }
+  .tier h3 {
+    font-family: 'Lora', Georgia, serif; font-style: italic; font-weight: 500;
+    font-size: 1.35rem; line-height: 1.2; margin: 0 0 .25rem; color: var(--spruce);
+  }
+  .tier-terms {
+    font-size: .8rem; line-height: 1.5; color: var(--copper-lit); margin: 0 0 1rem;
+  }
+  .tier-lead { margin: 0 0 .7rem; font-size: .92rem; color: var(--spruce); }
+  .tier .mark-list li { font-size: .92rem; margin-bottom: .55rem; }
+  .tier-foot {
+    margin: auto 0 0; padding-top: 1rem; font-size: .8rem; line-height: 1.5;
+    color: var(--spruce-dim);
+  }
+  .tag {
+    display: inline-block; vertical-align: middle; margin-left: .4rem;
+    font-family: 'Poppins', sans-serif; font-style: normal; font-weight: 500;
+    font-size: .62rem; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--green-deep); background: var(--copper-lit);
+    border-radius: 2px; padding: .15rem .45rem;
+  }
+  @media (max-width: 760px) { .tiers { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -139,8 +191,9 @@
       the chord shapes, your songs and the capo.
     </p>
 
-    <a class="cta" href="https://play.google.com/store/apps/details?id=com.woodyb.sitka">Get it on Google Play</a>
+    <a class="cta" href="https://play.google.com/store/apps/details?id=com.woodyb.sitka">Available on Google Play</a>
     <p class="cta-note">Free on Android</p>
+    <p class="cta-note soon">iPhone and iPad: coming soon</p>
   </div>
 </header>
 
@@ -290,6 +343,61 @@
 
   <div class="divider rule" role="separator"><span></span></div>
 
+  <!--
+    What is in the app, one card each. Written against feature/pro and
+    release/46 (2026-11-22): tuningLibrary.ts (33), scales/fullNeck.ts,
+    scales/noteFinder.ts, phrases/ (words.ts, chains.ts, generator.ts,
+    PhraseStudy.tsx). DRAFT words, not yet approved.
+  -->
+  <section class="feature wide" id="inside">
+    <p class="eyebrow">What&rsquo;s inside</p>
+    <h2>Pick a tuning once. Everything works in it.</h2>
+    <ul class="parts">
+      <li class="part">
+        <h3>Tuner</h3>
+        <p>33 tunings, from Standard to open and modal.</p>
+        <p>Make your own a semitone at a time, or play your guitar and Sitka captures the tuning it&rsquo;s in.</p>
+      </li>
+      <li class="part">
+        <h3>Chords</h3>
+        <p>Every chord in a key, worked out for your tuning and capo, the easiest shape first.</p>
+        <p>Fret a shape on the neck and Sitka names it.</p>
+      </li>
+      <li class="part">
+        <h3>Scales and Across the neck</h3>
+        <p>Scales on the neck in any tuning, in positions Sitka works out for that tuning.</p>
+        <p>Across the neck links them into runs up the whole fretboard, with a finger for every note.</p>
+      </li>
+      <li class="part">
+        <h3>Phrases</h3>
+        <p>Short licks written for Sitka, placed on your neck in any key and tuning. Sitka follows each note as you play.</p>
+        <p>Link licks into chains, or make a new lick with the generator. It runs on your phone, no internet needed.</p>
+        <p>Study shows the theory behind every note.</p>
+      </li>
+      <li class="part">
+        <h3>Note finder</h3>
+        <p>Learn the fretboard: find one note everywhere it falls, string by string or at random.</p>
+        <p>Sitka listens, and moves on when you find it.</p>
+      </li>
+      <li class="part">
+        <h3>Writer</h3>
+        <p>Lyrics with chords above the words, a rhyme dictionary and a syllable count on every line.</p>
+        <p>Perform scrolls the song at your tempo.</p>
+      </li>
+      <li class="part">
+        <h3>Metronome</h3>
+        <p>Meters, subdivisions and tap tempo.</p>
+      </li>
+      <li class="part">
+        <h3>Voice trainer</h3>
+        <p>Sing to a reference note and get three numbers: time in tune, sharp or flat, and how long you took to find it.</p>
+        <p>Every exercise stays inside your range.</p>
+      </li>
+    </ul>
+  </section>
+
+  <div class="divider rule" role="separator"><span></span></div>
+
   <section class="feature wrap">
     <p class="eyebrow">Chord voicings</p>
     <h2>Shapes for the tuning you are actually in</h2>
@@ -307,7 +415,7 @@
     <ul class="tunings">
       <li>Standard</li><li>Drop D</li><li>DADGAD</li><li>Open G</li>
       <li>Open D</li><li>Open C</li><li>Modal</li>
-      <li class="more">30 in all</li>
+      <li class="more">33 in all</li>
     </ul>
   </section>
 
@@ -446,19 +554,19 @@
   -->
   <section class="feature wide">
     <p class="eyebrow">The library</p>
-    <h2>Thirty, and they come in families</h2>
+    <h2>Thirty-three, and they come in families</h2>
     <p class="lede-wide">
-      Thirty is a number. This is the shape of it &mdash; and why the open
+      Thirty-three is a number. This is the shape of it &mdash; and why the open
       tunings are the biggest group, because that is where most of the
       interesting ones live.
     </p>
     <div class="families">
         <div class="fam">
           <p class="fam-name">Standard &amp; shifts</p>
-          <div class="fam-bar" style="--n:30.76923076923077%">
-            <span class="fam-count">4</span>
+          <div class="fam-bar" style="--n:46.15384615384615%">
+            <span class="fam-count">6</span>
           </div>
-          <p class="fam-list">Standard, E♭, D, C</p>
+          <p class="fam-list">Standard, E♭, D, C♯, C, B</p>
         </div>
 
         <div class="fam">
@@ -487,10 +595,10 @@
 
         <div class="fam">
           <p class="fam-name">Other</p>
-          <div class="fam-bar" style="--n:15.384615384615385%">
-            <span class="fam-count">2</span>
+          <div class="fam-bar" style="--n:23.076923076923077%">
+            <span class="fam-count">3</span>
           </div>
-          <p class="fam-list">All Fourths, New Standard</p>
+          <p class="fam-list">All Fourths, New Standard, C G C F C E</p>
         </div>
     </div>
     <p class="verdict">And up to 20 of your own with the unlock, a semitone at a time, if none of them is yours.</p>
@@ -516,58 +624,48 @@
 
   <div class="divider rule" role="separator"><span></span></div>
 
-  <section class="feature wrap">
-    <p class="eyebrow">Also inside</p>
-    <h2>A metronome, and a trainer for your ear</h2>
-    <p>
-      A metronome with meters and subdivisions. And a vocal trainer that
-      reports <strong>three numbers rather than one</strong> — how long you
-      held the note, whether you sat sharp or flat, and how long you took
-      to find it — because those are three different problems with three
-      different fixes.
-    </p>
-    <p>
-      It builds every exercise inside the range you gave it and never
-      above it.
-    </p>
-    <p>
-      Chord practice: progressions like <span style="white-space: nowrap">I&ndash;V&ndash;vi&ndash;IV</span> shown one
-      chord at a time with the next one waiting, from open shapes up the
-      neck (the full game is part of the unlock).
-    </p>
-  </section>
-
-  <div class="divider rule" role="separator"><span></span></div>
-
   <!--
-    What is free and what is in the unlock. Kept in step with GATED and
-    ALWAYS_FREE in the app's src/entitlement.ts; if either list changes,
-    this section changes with it. No price: Play localises it.
+    What is free, what is in the unlock, and what Pro will add. The Free and
+    Unlock lists are the owner's brief (2026-11-22); keep them in step with
+    GATED and ALWAYS_FREE in the app's src/entitlement.ts, and Pro with
+    PRO_GATED. No prices: the store localises them, and Pro has none yet.
+    DRAFT words, not yet approved.
   -->
-  <section class="feature wrap" id="pricing">
+  <section class="feature wide" id="pricing">
     <p class="eyebrow">What it costs</p>
     <h2>Free to use, one unlock if you want more</h2>
-    <div class="quiet">
-      <p><strong>Free</strong></p>
-      <ul class="mark-list">
-        <li>The tuner, and all 30 tunings.</li>
-        <li>The metronome.</li>
-        <li>Songwriting: Perform, capo, export and the rhyme dictionary.</li>
-        <li>Chord browsing, with the best shape for every chord.</li>
-        <li>Explore: fret any shape and Sitka names it, then strum it.</li>
-        <li>The voice tuner.</li>
-        <li>Backup and restore.</li>
-      </ul>
-    </div>
-    <div class="quiet">
-      <p><strong>One-time unlock, no subscription</strong></p>
-      <ul class="mark-list">
-        <li>Every ranked shape for every chord.</li>
-        <li>My shapes.</li>
-        <li>Custom and captured tunings, up to 20 of your own.</li>
-        <li>The full chord practice game.</li>
-        <li>Graded voice sessions.</li>
-      </ul>
+    <div class="tiers">
+      <div class="tier">
+        <h3>Free</h3>
+        <p class="tier-terms">No account, no ads.</p>
+        <ul class="mark-list">
+          <li>The tuner.</li>
+          <li>All 33 built-in tunings.</li>
+          <li>The metronome.</li>
+          <li>Songwriting.</li>
+        </ul>
+      </div>
+      <div class="tier">
+        <h3>Unlock</h3>
+        <p class="tier-terms">One-time purchase, no subscription.</p>
+        <p class="tier-lead">Everything in Free, plus:</p>
+        <ul class="mark-list">
+          <li>Custom tunings.</li>
+          <li>Capture: play your guitar and save its tuning.</li>
+          <li>Chord shapes ranked for your tuning.</li>
+          <li>Graded voice sessions.</li>
+        </ul>
+        <p class="tier-foot">Priced in your local currency in the store.</p>
+      </div>
+      <div class="tier later">
+        <h3>Pro <span class="tag">Coming soon</span></h3>
+        <p class="tier-terms">Android first, iPhone and iPad later.</p>
+        <ul class="mark-list">
+          <li>Plug-in mode: your guitar into your phone through a USB audio interface.</li>
+          <li>A practice amp for your headphones.</li>
+        </ul>
+        <p class="tier-foot">No price yet.</p>
+      </div>
     </div>
   </section>
 
@@ -610,9 +708,9 @@
   </section>
 
   <section class="feature closing">
-    <a class="cta" href="https://play.google.com/store/apps/details?id=com.woodyb.sitka">Get it on Google Play</a>
+    <a class="cta" href="https://play.google.com/store/apps/details?id=com.woodyb.sitka">Available on Google Play</a>
     <p class="cta-note">
-      Free — tuner, all thirty tunings, metronome and songwriting.
+      Free: tuner, all 33 tunings, metronome and songwriting.
       One <a href="#pricing">optional unlock</a>; no subscription, no ads, no account.
     </p>
   </section>

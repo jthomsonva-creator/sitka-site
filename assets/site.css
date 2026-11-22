@@ -220,18 +220,18 @@ footer nav a { margin: 0 .6rem; font-size: .875rem; }
 .fret-name {
   display: block; font-family: 'Poppins', sans-serif; font-weight: 500;
   font-size: .74rem; letter-spacing: .16em; text-transform: uppercase;
-  color: var(--copper);
+  color: var(--copper-lit);   /* AA on the card: copper is 4.19:1 there */
 }
 .fret-strings {
   display: block; font-family: ui-monospace, Menlo, monospace;
-  font-size: .68rem; letter-spacing: .1em; color: var(--patina); margin-top: .15rem;
+  font-size: .68rem; letter-spacing: .1em; color: var(--spruce-dim); margin-top: .15rem;
 }
 .fret svg, .rank-item svg { display: block; width: 100%; max-width: 132px; height: auto; margin: 0 auto; }
 .fret-shape {
   font-family: ui-monospace, Menlo, monospace; font-size: .76rem;
   color: var(--spruce); margin: .7rem 0 .15rem; letter-spacing: .03em;
 }
-.fret-meta { font-size: .7rem; color: var(--patina); margin: 0 0 .35rem; }
+.fret-meta { font-size: .7rem; color: var(--spruce-dim); margin: 0 0 .35rem; } /* patina is 4.33:1 on the card */
 .fret-fingers { color: var(--copper-lit); }
 .fret-gloss {
   font-family: 'Lora', Georgia, serif; font-style: italic;
@@ -242,9 +242,9 @@ footer nav a { margin: 0 .6rem; font-size: .875rem; }
 .rank-n {
   position: absolute; top: .5rem; left: .6rem;
   font-family: ui-monospace, Menlo, monospace; font-size: .7rem;
-  color: var(--copper); opacity: .8;
+  color: var(--copper-lit);
 }
-.rank-score { margin: .5rem 0 .2rem; font-size: .7rem; color: var(--patina); }
+.rank-score { margin: .5rem 0 .2rem; font-size: .7rem; color: var(--spruce-dim); }
 .rank-score span {
   font-family: ui-monospace, Menlo, monospace; font-size: 1.15rem;
   color: var(--copper-lit); margin-right: .25rem;
