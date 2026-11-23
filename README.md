@@ -8,11 +8,14 @@ dependencies — edit a file, commit, and it is live in a minute or two.
 
 The illustrations are the one exception, and they are generated *before*
 commit, not at deploy: `tools/build-visuals.mjs` imports the Sitka app's
-own modules from a checkout beside this one and rewrites the blocks in
+own modules — by default `origin/feature/pro` of the main repo
+(`../guitar-tuner`), read with `git archive` so no branch or working tree
+is touched — and rewrites the blocks in
 `index.html` between `<!-- GENERATED:name -->` markers. Nothing in a
 figure is drawn by hand. Needs Node 22.6+ (it strips TypeScript):
 
-    node --experimental-strip-types tools/build-visuals.mjs --app ../sitka-tunings
+    git -C ../guitar-tuner fetch origin
+    node --experimental-strip-types tools/build-visuals.mjs                # --ref <ref>, or --app <checkout>
     node --experimental-strip-types tools/build-visuals.mjs --check   # exit 1 if stale
     node tools/contrast.mjs                                            # every colour pair vs WCAG AA
 
