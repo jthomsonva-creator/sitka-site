@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sitka: Guitar Tuner &amp; Chords</title>
 <meta name="description" content="Every tuning. Every shape. Every song. A guitar tuner, chord finder and songbook for Android, built for players who don&rsquo;t stay in standard.">
+<meta name="theme-color" content="#0E0A05">
 <link rel="icon" href="/assets/favicon-32.png" sizes="32x32">
 <link rel="icon" href="/assets/favicon.png" sizes="48x48">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
@@ -19,609 +20,486 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;1,400;1,500&family=Poppins:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,400;1,500&family=Poppins:wght@300;400;500&display=swap">
 <link rel="stylesheet" href="/assets/site.css">
 <style>
-  /* ---------------- hero ---------------- */
-  .hero {
-    position: relative; overflow: hidden;
-    background:
-      radial-gradient(120% 90% at 50% 0%, var(--green-lift) 0%, var(--green) 45%, var(--green-deep) 100%);
-    border-bottom: 1px solid var(--hair);
-    padding: clamp(3.5rem, 11vw, 7rem) 0 clamp(3rem, 8vw, 5rem);
-    text-align: center;
+  /* ---------------- the bar ---------------- */
+  .bar { border-bottom: 1px solid var(--hair); }
+  .bar .in {
+    max-width: 68rem; margin: 0 auto; padding: 10px 16px;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
   }
-  /* the mark again, enormous and nearly invisible, behind everything */
-  .hero::before {
-    content: ""; position: absolute; z-index: 0;
-    top: 50%; left: 50%; transform: translate(-50%, -50%);
-    width: min(132vw, 900px); aspect-ratio: 1;
-    background: url("/assets/mark.png") center / contain no-repeat;
-    opacity: .045;
-    pointer-events: none;
-  }
-  .hero > .wrap { position: relative; z-index: 1; }
+  .brand { display: flex; align-items: center; gap: .6rem; text-decoration: none; color: var(--ink); }
+  .brand .app-icon { width: 36px; height: 36px; }
+  .brand span { font-family: 'Lora', Georgia, serif; font-style: italic; font-size: 1.4rem; line-height: 1; }
+  .bar .cta { min-height: 40px; padding: .5rem .9rem; font-size: .7rem; }
 
-  .mark {
-    width: clamp(140px, 34vw, 208px); height: auto; display: block;
-    margin: 0 auto clamp(1.5rem, 4vw, 2.25rem);
+  /* ---------------- hero: hook, tagline, payoff, one button ---------------- */
+  .hero { padding: clamp(2rem, 7vw, 4.5rem) 0 clamp(2rem, 6vw, 3.5rem); }
+  .hero .in {
+    max-width: 68rem; margin: 0 auto; padding: 0 16px;
+    display: grid; gap: 1.5rem;
+    grid-template-areas: "hook" "tag" "payoff" "act";
+    align-content: center;
   }
-  .wordmark {
-    font-family: 'Lora', Georgia, serif; font-style: italic; font-weight: 500;
-    font-size: clamp(2.6rem, 9vw, 3.8rem); line-height: 1;
-    margin: 0 0 .35rem; letter-spacing: .01em; color: var(--spruce);
+  .hook {
+    grid-area: hook; margin: 0;
+    font-family: 'Lora', Georgia, serif; font-style: italic; font-weight: 400;
+    font-size: clamp(1.9rem, 7.4vw, 3.3rem); line-height: 1.15;
+    color: var(--ink); text-wrap: balance; max-width: 22ch;
   }
   .tagline {
+    grid-area: tag; margin: 0;
     font-family: 'Poppins', sans-serif; font-weight: 400;
-    font-size: .74rem; letter-spacing: .28em; text-transform: uppercase;
-    color: var(--copper-lit); margin: 0 0 clamp(2rem, 6vw, 3rem);
+    font-size: clamp(.95rem, 3.6vw, 1.1rem); letter-spacing: .04em;
+    color: var(--copper);
   }
-  .claim {
+  .payoff { grid-area: payoff; margin: 0; }
+  .act { grid-area: act; }
+  .act-note { margin: .75rem 0 0; font-size: .85rem; color: var(--ink-faint); }
+  @media (min-width: 860px) {
+    .hero .in {
+      grid-template-columns: 1fr 300px; column-gap: 4rem; row-gap: 1.25rem;
+      grid-template-rows: 1fr auto auto auto 1fr;
+      grid-template-areas: ". payoff" "hook payoff" "tag payoff" "act payoff" ". payoff";
+    }
+    .payoff { width: 300px; }
+  }
+
+  /* ---------------- placeholders for footage and screenshots ---------------- */
+  /* 1080x2160, the store shots' shape; drawn, never loaded */
+  .ph {
+    aspect-ratio: 1 / 2; width: 100%; max-width: 300px; margin: 0 auto;
+    border: 1px dashed var(--copper-mid); border-radius: 18px;
+    background: var(--surface);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: .55rem; padding: 1.25rem; text-align: center;
+  }
+  .ph-tag {
+    font-size: .68rem; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--ground); background: var(--copper); border-radius: var(--r-control);
+    padding: .15rem .5rem; font-weight: 500;
+  }
+  .ph-title { font-family: 'Lora', Georgia, serif; font-style: italic; font-size: 1.1rem; color: var(--ink); line-height: 1.3; }
+  .ph-what { font-size: .82rem; color: var(--ink-dim); line-height: 1.5; }
+  .ph-file { font-size: .72rem; color: var(--ink-faint); word-break: break-word; }
+  .hero .ph { max-width: 260px; }
+  @media (min-width: 860px) { .hero .ph { max-width: 300px; } }
+
+  /* ---------------- the objections ---------------- */
+  .objections {
+    list-style: none; margin: 0; padding: .9rem 16px;
+    border-top: 1px solid var(--hair); border-bottom: 1px solid var(--hair);
+    background: var(--lift);
+    display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem 1.6rem;
+  }
+  .objections li {
+    font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink);
+    display: flex; align-items: center; gap: .55rem;
+  }
+  .objections li::before { content: ""; width: 6px; height: 6px; background: var(--copper); }
+
+  /* ---------------- features ---------------- */
+  main { padding-top: clamp(2.5rem, 8vw, 4.5rem); }
+  .feat {
+    max-width: 68rem; margin: 0 auto clamp(3rem, 9vw, 5rem); padding: 0 16px;
+    display: grid; gap: 1.1rem;
+  }
+  .feat h2, .sect h2, .call h2 {
     font-family: 'Lora', Georgia, serif; font-style: italic; font-weight: 400;
-    font-size: clamp(1.35rem, 4.6vw, 1.85rem); line-height: 1.35;
-    color: var(--spruce); margin: 0 auto 1.1rem; max-width: 26rem;
-    text-wrap: balance;
+    font-size: clamp(1.45rem, 5.2vw, 2.1rem); line-height: 1.2;
+    margin: 0; color: var(--ink); text-wrap: balance; max-width: 26ch;
   }
-  .claim em { font-style: normal; color: var(--copper-lit); }
-  .sub { color: var(--spruce-dim); margin: 0 auto; max-width: 27rem; }
+  .feat-body p { margin: 0 0 .5rem; color: var(--ink-dim); max-width: 36rem; }
+  .feat-body p:last-child { margin-bottom: 0; }
+  .feat-body strong { font-weight: 400; color: var(--ink); }
+  .panel {
+    background: var(--surface); border: 1px solid var(--hair); border-radius: var(--r-card);
+    padding: clamp(1rem, 3.5vw, 1.6rem);
+  }
+  .pair { display: grid; gap: 1.1rem; }
+  .pair .ph { max-width: 180px; }
+  @media (min-width: 860px) {
+    .pair { grid-template-columns: minmax(0, 1fr) 260px; align-items: start; }
+    .pair .ph { max-width: 220px; }
+  }
+  .feat .panel + .feat-body { margin-top: .2rem; }
 
-  .cta {
-    display: inline-block; margin-top: clamp(2rem, 5vw, 2.75rem);
-    font-family: 'Poppins', sans-serif; font-weight: 400;
-    font-size: .78rem; letter-spacing: .16em; text-transform: uppercase;
-    color: var(--green-deep); background: var(--copper-lit);
-    border: 1px solid var(--copper-lit); border-radius: 999px;
-    padding: .8rem 1.6rem; text-decoration: none;
-    transition: background .18s ease, transform .18s ease;
+  /* ---------------- the generated figures ---------------- */
+  .viz { display: block; width: 100%; height: auto; }
+  .viz.neck { max-width: 820px; margin: 0 auto; }
+  .viz.neck.fit { max-width: 480px; }
+  .viz.neck-v { display: none; max-width: 240px; }
+  @media (max-width: 639px) {
+    .viz.neck-h:not(.fit) { display: none; }
+    .viz.neck-v { display: block; }
   }
-  .cta:hover {
-    background: var(--spruce); border-color: var(--spruce);
-    color: var(--green-deep); transform: translateY(-1px);
+  .viz-cap { margin: .9rem 0 0; font-size: .82rem; color: var(--ink-faint); line-height: 1.5; text-align: center; }
+  .legend {
+    list-style: none; margin: .8rem 0 0; padding: 0;
+    display: flex; flex-wrap: wrap; justify-content: center; gap: .3rem 1.1rem;
   }
-  .cta-note {
-    margin: .9rem 0 0;
-    font-size: .78rem; letter-spacing: .1em;
-    color: var(--patina);
-  }
-  .closing { text-align: center; padding-top: clamp(1rem, 4vw, 2rem); }
-  .closing .cta { margin-top: 0; }
-  .closing .cta-note { max-width: 24rem; margin-left: auto; margin-right: auto; letter-spacing: 0; }
+  .legend li { font-size: .78rem; color: var(--ink-dim); display: flex; align-items: center; gap: .45rem; }
+  .swatch { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
 
-  /* ---------------- sections ---------------- */
-  main { padding: clamp(3rem, 9vw, 5.5rem) 0 0; }
-  .feature { padding-bottom: clamp(2.5rem, 7vw, 4rem); }
-  .feature h2 {
-    font-family: 'Lora', Georgia, serif; font-style: italic; font-weight: 500;
-    font-size: clamp(1.5rem, 5vw, 2rem); line-height: 1.2;
-    margin: 0 0 1rem; color: var(--spruce); text-wrap: balance;
+  .minirow { display: grid; gap: .75rem; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .minirow.four { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @media (min-width: 640px) {
+    .minirow.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .minirow.six { grid-template-columns: repeat(6, minmax(0, 1fr)); }
   }
-  .feature p { margin: 0 0 1rem; color: var(--spruce-dim); }
-  .feature p:last-child { margin-bottom: 0; }
-  .feature strong { font-weight: 500; color: var(--spruce); }
+  .mini {
+    margin: 0; text-align: center; position: relative;
+    background: var(--raise); border: 1px solid var(--hair); border-radius: var(--r-card);
+    padding: .7rem .4rem .7rem;
+  }
+  .mini figcaption { margin-bottom: .3rem; }
+  .mini-name { display: block; font-family: 'Lora', Georgia, serif; font-style: italic; font-size: 1.05rem; color: var(--ink); line-height: 1.25; }
+  .mini-sub { display: block; font-size: .7rem; letter-spacing: .08em; color: var(--ink-faint); }
+  .mini .viz { max-width: 120px; margin: 0 auto; }
+  .mini-shape { margin: .35rem 0 0; font-size: .78rem; color: var(--ink); letter-spacing: .04em; font-variant-numeric: tabular-nums; }
+  .mini-meta { margin: .1rem 0 0; font-size: .72rem; color: var(--ink-dim); }
+  .mini-gloss { margin: .4rem 0 0; font-family: 'Lora', Georgia, serif; font-style: italic; font-size: .85rem; line-height: 1.4; color: var(--ink-dim); }
+  .rank-n { position: absolute; top: .45rem; left: .6rem; font-size: .75rem; color: var(--copper); }
+  .rank-score { margin: .3rem 0 0; font-size: .72rem; color: var(--ink-dim); }
+  .rank-score span { font-size: 1.1rem; color: var(--copper); margin-right: .2rem; }
+  .split { display: grid; gap: 1.25rem; }
+  @media (min-width: 860px) { .split { grid-template-columns: 1.2fr 1fr; align-items: start; } }
+  .sub-h { margin: 0 0 .7rem; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-faint); font-weight: 400; }
 
-  .rule { margin: 0 auto clamp(2.5rem, 7vw, 4rem); max-width: var(--measure); padding: 0 1.4rem; }
+  /* the families */
+  .families { display: flex; flex-direction: column; gap: .9rem; }
+  .fam { display: grid; gap: .3rem; }
+  .fam-name { margin: 0; font-size: .74rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink); }
+  .fam-count { color: var(--copper); margin-left: .35rem; }
+  .fam .viz { width: auto; max-width: 100%; height: 14px; }
+  .fam-list { margin: 0; font-size: .74rem; color: var(--ink-faint); line-height: 1.5; }
+  .fam-note { margin: .9rem 0 0; font-size: .78rem; color: var(--ink-faint); }
 
-  .tunings {
-    display: flex; flex-wrap: wrap; gap: .45rem;
-    margin: 1.5rem 0 0; padding: 0; list-style: none;
+  /* STUDY's words */
+  .study-chords {
+    margin: 0 0 .8rem; text-align: center;
+    font-family: 'Lora', Georgia, serif; font-style: italic; font-size: 1.15rem; color: var(--copper);
   }
-  .tunings li {
-    font-family: 'Poppins', sans-serif; font-size: .72rem; font-weight: 400;
-    letter-spacing: .1em; text-transform: uppercase;
-    color: var(--patina);
-    border: 1px solid var(--hair); border-radius: 2px;
-    padding: .35rem .7rem;
-  }
-  .tunings li.more { border-style: dashed; color: var(--copper); }
+  .study-lines { margin: 1rem auto 0; padding-left: 1.4rem; max-width: 30rem; font-size: .84rem; color: var(--ink-dim); line-height: 1.55; }
+  .study-lines li::marker { color: var(--ink-faint); }
 
-  .quiet {
-    background: var(--green);
-    border: 1px solid var(--hair);
-    border-radius: 3px;
-    padding: clamp(1.5rem, 5vw, 2.25rem);
-    margin-top: 1.5rem;
-  }
-  .after-panel { margin-top: 1.25rem; }
-  .hero .cta-note { color: var(--spruce-dim); } /* patina is 3.67:1 on the hero */
-  .cta-note.soon { margin-top: .3rem; }
+  /* the Writer's line */
+  .lyric { display: flex; align-items: flex-end; justify-content: center; gap: 1rem; padding: .5rem 0; }
+  .lyric-line { margin: 0; display: flex; flex-wrap: wrap; row-gap: .4rem; font-size: clamp(1rem, 4.2vw, 1.25rem); }
+  .seg { display: inline-flex; flex-direction: column; }
+  .ch { font-weight: 500; color: var(--copper); font-size: .85em; line-height: 1.3; }
+  .ly { color: var(--ink); line-height: 1.35; }
+  .syl { font-size: .8rem; color: var(--ink-faint); border: 1px solid var(--hair-lit); border-radius: var(--r-control); padding: .1rem .45rem; font-variant-numeric: tabular-nums; }
 
-  /* ---------------- what's inside: one card per part of the app ---------------- */
-  .parts {
-    list-style: none; margin: 1.75rem 0 0; padding: 0;
-    display: grid; gap: 1rem; grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .part {
-    background: var(--green); border: 1px solid var(--hair); border-radius: 3px;
-    padding: 1.15rem 1.2rem 1.2rem;
-  }
-  .part h3 {
-    font-family: 'Poppins', sans-serif; font-weight: 500;
-    font-size: .74rem; letter-spacing: .16em; text-transform: uppercase;
-    color: var(--copper-lit); margin: 0 0 .45rem;
-  }
-  .part p { margin: 0 0 .5rem; color: var(--spruce-dim); font-size: .92rem; line-height: 1.6; }
-  .part p:last-child { margin-bottom: 0; }
-  @media (max-width: 640px) { .parts { grid-template-columns: 1fr; } }
+  /* the smaller two */
+  .also { display: grid; gap: 1rem; }
+  @media (min-width: 640px) { .also { grid-template-columns: 1fr 1fr; } }
+  .also h3 { margin: 0 0 .4rem; font-size: .76rem; letter-spacing: .16em; text-transform: uppercase; font-weight: 400; color: var(--copper); }
+  .also p { margin: 0 0 .4rem; font-size: .92rem; color: var(--ink-dim); }
 
-  /* ---------------- pricing: three tiers ---------------- */
-  .tiers {
-    display: grid; gap: 1rem; grid-template-columns: repeat(3, minmax(0, 1fr));
-    margin: 1.75rem 0 0; align-items: stretch;
-  }
+  /* ---------------- calls to action ---------------- */
+  .call { text-align: center; padding: clamp(1rem, 4vw, 2rem) 16px clamp(3rem, 8vw, 4.5rem); }
+  .call h2 { margin: 0 auto 1.2rem; }
+  .call .act-note { max-width: 26rem; margin-left: auto; margin-right: auto; }
+
+  /* ---------------- sections after the features ---------------- */
+  .sect { max-width: 68rem; margin: 0 auto clamp(3rem, 9vw, 5rem); padding: 0 16px; }
+  .sect > h2 { margin-bottom: 1.25rem; }
+  .rule { max-width: 68rem; margin: 0 auto clamp(2.5rem, 7vw, 4rem); padding: 0 16px; }
+
+  .tiers { display: grid; gap: 1rem; }
+  @media (min-width: 760px) { .tiers { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
   .tier {
-    background: var(--green); border: 1px solid var(--hair); border-radius: 3px;
+    background: var(--surface); border: 1px solid var(--hair); border-radius: var(--r-card);
     padding: 1.3rem 1.2rem 1.35rem; display: flex; flex-direction: column;
   }
-  .tier.later { border-style: dashed; }
-  .tier h3 {
-    font-family: 'Lora', Georgia, serif; font-style: italic; font-weight: 500;
-    font-size: 1.35rem; line-height: 1.2; margin: 0 0 .25rem; color: var(--spruce);
-  }
-  .tier-terms {
-    font-size: .8rem; line-height: 1.5; color: var(--copper-lit); margin: 0 0 1rem;
-  }
-  .tier-lead { margin: 0 0 .7rem; font-size: .92rem; color: var(--spruce); }
+  .tier.later { border-style: dashed; border-color: var(--hair-lit); }
+  .tier h3 { font-family: 'Lora', Georgia, serif; font-style: italic; font-weight: 400; font-size: 1.4rem; line-height: 1.2; margin: 0 0 .25rem; color: var(--ink); }
+  .tier-terms { font-size: .82rem; line-height: 1.5; color: var(--copper); margin: 0 0 1rem; }
+  .tier-lead { margin: 0 0 .7rem; font-size: .92rem; color: var(--ink); }
   .tier .mark-list li { font-size: .92rem; margin-bottom: .55rem; }
-  .tier-foot {
-    margin: auto 0 0; padding-top: 1rem; font-size: .8rem; line-height: 1.5;
-    color: var(--spruce-dim);
-  }
+  .tier-foot { margin: auto 0 0; padding-top: 1rem; font-size: .8rem; line-height: 1.5; color: var(--ink-faint); }
   .tag {
     display: inline-block; vertical-align: middle; margin-left: .4rem;
     font-family: 'Poppins', sans-serif; font-style: normal; font-weight: 500;
     font-size: .62rem; letter-spacing: .14em; text-transform: uppercase;
-    color: var(--green-deep); background: var(--copper-lit);
-    border-radius: 2px; padding: .15rem .45rem;
+    color: var(--ground); background: var(--copper);
+    border-radius: var(--r-control); padding: .15rem .45rem;
   }
-  @media (max-width: 760px) { .tiers { grid-template-columns: 1fr; } }
+
+  .privacy p { color: var(--ink-dim); max-width: 36rem; }
+  .privacy .panel { max-width: 40rem; margin: 1.1rem 0; }
+  .privacy strong { font-weight: 400; color: var(--ink); }
+
+  /* the longer version, folded */
+  .details details { border-top: 1px solid var(--hair); }
+  .details details:last-of-type { border-bottom: 1px solid var(--hair); }
+  .details summary {
+    cursor: pointer; list-style: none; padding: 1rem 2rem 1rem 0; position: relative;
+    font-family: 'Lora', Georgia, serif; font-style: italic; font-size: 1.15rem; color: var(--ink);
+  }
+  .details summary::-webkit-details-marker { display: none; }
+  .details summary::after {
+    content: "+"; position: absolute; right: .3rem; top: .85rem;
+    font-family: 'Poppins', sans-serif; font-style: normal; font-size: 1.2rem; color: var(--copper);
+  }
+  .details details[open] summary::after { content: "\2212"; }
+  .details .body { padding: 0 0 1.5rem; }
+  .details .body p { color: var(--ink-dim); max-width: 36rem; margin: 0 0 .9rem; }
+  .details .body .minirow { margin: 1rem 0; }
+  .details .verdict { font-family: 'Lora', Georgia, serif; font-style: italic; color: var(--ink); margin: .5rem 0 0; }
+  .chips { display: flex; flex-wrap: wrap; gap: .45rem; margin: 1rem 0 0; padding: 0; list-style: none; }
 </style>
 </head>
 <body>
 
+<div class="bar">
+  <div class="in">
+    <a class="brand" href="/" aria-label="Sitka, home">
+      <img class="app-icon" src="/assets/icon.png" alt="" width="36" height="36">
+      <span>Sitka</span>
+    </a>
+    <a class="cta" href="https://play.google.com/store/apps/details?id=com.woodyb.sitka">Get it on Google Play</a>
+  </div>
+</div>
+
+<!--
+  HERO — hook-first. DRAFT headline (option A of three; B and C are in the
+  report and here):
+    A. For anyone who's ever retuned a guitar and lost every chord they know.
+    B. You changed the tuning. Your chord chart didn't.
+    C. Drop to DADGAD and the shapes you know stop working. Sitka finds new ones.
+  The subhead is the approved tagline.
+-->
 <header class="hero">
-  <div class="wrap">
-    <img class="mark" src="/assets/mark.png" alt="The Sitka mark: a tuning fork" width="1024" height="1024">
-    <h1 class="wordmark">Sitka</h1>
-    <p class="tagline">Guitar tuner &amp; chords</p>
+  <div class="in">
+    <h1 class="hook">For anyone who&rsquo;s ever retuned a guitar and lost every chord they know.</h1>
+    <p class="tagline">Every tuning. Every shape. Every song.</p>
 
-    <p class="claim">Every tuning. Every <em>shape</em>. Every song.</p>
-    <p class="sub">
-      A guitar tuner, chord finder and songbook for players who don&rsquo;t
-      stay in standard. Pick a tuning and everything follows it: the tuner,
-      the chord shapes, your songs and the capo.
-    </p>
+    <!--
+      PAYOFF: the owner's own screen recording goes here — no generated or
+      AI imagery. When it exists, replace the placeholder with:
+        <video class="loop" autoplay muted loop playsinline preload="metadata"
+               width="1080" height="2160" poster="/assets/shots/v2-hero.webp"
+               aria-label="Changing the tuning in Sitka: the chord shapes redraw for the new tuning">
+          <source src="/assets/video/hero-loop.mp4" type="video/mp4">
+        </video>
+      and under prefers-reduced-motion show the poster with controls instead
+      of autoplaying. Poster from store/play/phone-v2 (vc50), never vc49.
+    -->
+    <figure class="payoff">
+      <div class="ph" role="img" aria-label="Placeholder for a screen recording: changing the tuning, and the chord shapes redraw">
+        <span class="ph-tag">Placeholder</span>
+        <span class="ph-title">Screen recording, a short loop</span>
+        <span class="ph-what">Change the tuning &rarr; the chord shapes redraw for it</span>
+        <span class="ph-file">assets/video/hero-loop.mp4 &middot; your own footage</span>
+      </div>
+    </figure>
 
-    <a class="cta" href="https://play.google.com/store/apps/details?id=com.woodyb.sitka">Available on Google Play</a>
-    <p class="cta-note">Free on Android</p>
-    <p class="cta-note soon">iPhone and iPad: coming soon</p>
+    <div class="act">
+      <a class="cta" href="https://play.google.com/store/apps/details?id=com.woodyb.sitka">Get it on Google Play</a>
+      <p class="act-note">Free on Android. iPhone and iPad: coming soon.</p>
+    </div>
   </div>
 </header>
+
+<!-- DRAFT: the objections strip. "Works offline": nothing in the app needs a network but Play's own billing check, which is cached. -->
+<ul class="objections" aria-label="What Sitka does not ask for">
+  <li>No subscription</li>
+  <li>No account</li>
+  <li>No ads</li>
+  <li>Works offline</li>
+</ul>
 
 <main>
 
   <!--
-    Four fretboards, one chord. Every shape, finger count, note list and
-    score below is verbatim output of:
-      npm run voicings:compare -- --chord G --a Standard --b DADGAD --top 1 (and --a "Drop D" --b "Open G")
-    Nothing here is drawn from memory. If the ranking changes, re-run
-    that command and update these four blocks together.
+    FEATURES. Each opens with a DRAFT lead line (the h2), then its payoff
+    figure, then at most two lines of the copy drafted on 2026-11-22 (the
+    "What's inside" cards). Every figure is generated by
+    tools/build-visuals.mjs from the app's own modules.
   -->
-  <section class="feature wide" id="tunings">
-    <p class="eyebrow">One chord, four tunings</p>
-    <h2>G, as Sitka ranks it first in each</h2>
-    <p class="lede-wide">
-      Not transposed and not a capo trick. The fretboard is a different
-      instrument under each tuning, so the search runs again from
-      scratch &mdash; and the same six strings go from needing three
-      fingers to needing none. The notes underneath each diagram change
-      too: in DADGAD the low D stays put and G arrives as an inversion.
-    </p>
-    <div class="fretrow">
-        <figure class="fret">
-          <figcaption>
-            <span class="fret-name">Open G</span>
-            <span class="fret-strings">D G D G B D</span>
-          </figcaption>
-          <svg viewBox="0 0 140 140" role="img" aria-label="G in Open G: x-0-0-0-0-0">
-  <g fill="none" stroke="#8AA08D" stroke-width="1.5"><path d="M16 14 L24 22 M24 14 L16 22"/><circle cx="40" cy="18" r="4"/><circle cx="60" cy="18" r="4"/><circle cx="80" cy="18" r="4"/><circle cx="100" cy="18" r="4"/><circle cx="120" cy="18" r="4"/></g>
-  <rect x="18" y="28" width="104" height="4" fill="#C8D2B4"/>
-  <g stroke="#1C5949" stroke-width="1"><line x1="20" y1="56" x2="120" y2="56"/><line x1="20" y1="82" x2="120" y2="82"/><line x1="20" y1="108" x2="120" y2="108"/><line x1="20" y1="134" x2="120" y2="134"/></g>
-  <g stroke="#4E6B5E" stroke-width="1"><line x1="20" y1="32" x2="20" y2="134"/><line x1="40" y1="32" x2="40" y2="134"/><line x1="60" y1="32" x2="60" y2="134"/><line x1="80" y1="32" x2="80" y2="134"/><line x1="100" y1="32" x2="100" y2="134"/><line x1="120" y1="32" x2="120" y2="134"/></g>
-        </svg>
-          <p class="fret-shape">x-0-0-0-0-0</p>
-          <p class="fret-meta"><span class="fret-fingers">none</span> &middot; · G D G B D</p>
-          <p class="fret-gloss">Strum it. No hand on the neck at all.</p>
-        </figure>
 
-        <figure class="fret">
-          <figcaption>
-            <span class="fret-name">DADGAD</span>
-            <span class="fret-strings">D A D G A D</span>
-          </figcaption>
-          <svg viewBox="0 0 140 140" role="img" aria-label="G in DADGAD: 0-2-0-0-2-0">
-  <g fill="none" stroke="#8AA08D" stroke-width="1.5"><circle cx="20" cy="18" r="4"/><circle cx="60" cy="18" r="4"/><circle cx="80" cy="18" r="4"/><circle cx="120" cy="18" r="4"/></g>
-  <rect x="18" y="28" width="104" height="4" fill="#C8D2B4"/>
-  <g stroke="#1C5949" stroke-width="1"><line x1="20" y1="56" x2="120" y2="56"/><line x1="20" y1="82" x2="120" y2="82"/><line x1="20" y1="108" x2="120" y2="108"/><line x1="20" y1="134" x2="120" y2="134"/></g>
-  <g stroke="#4E6B5E" stroke-width="1"><line x1="20" y1="32" x2="20" y2="134"/><line x1="40" y1="32" x2="40" y2="134"/><line x1="60" y1="32" x2="60" y2="134"/><line x1="80" y1="32" x2="80" y2="134"/><line x1="100" y1="32" x2="100" y2="134"/><line x1="120" y1="32" x2="120" y2="134"/></g>
-  <g fill="#C88B4E"><circle cx="40" cy="69" r="7"/><circle cx="100" cy="69" r="7"/></g>
-        </svg>
-          <p class="fret-shape">0-2-0-0-2-0</p>
-          <p class="fret-meta"><span class="fret-fingers">two</span> &middot; D B D G B D</p>
-          <p class="fret-gloss">Two fingers, and the drone stays in the bass.</p>
-        </figure>
-
-        <figure class="fret">
-          <figcaption>
-            <span class="fret-name">Standard</span>
-            <span class="fret-strings">E A D G B E</span>
-          </figcaption>
-          <svg viewBox="0 0 140 140" role="img" aria-label="G in Standard: 3-2-0-0-0-3">
-  <g fill="none" stroke="#8AA08D" stroke-width="1.5"><circle cx="60" cy="18" r="4"/><circle cx="80" cy="18" r="4"/><circle cx="100" cy="18" r="4"/></g>
-  <rect x="18" y="28" width="104" height="4" fill="#C8D2B4"/>
-  <g stroke="#1C5949" stroke-width="1"><line x1="20" y1="56" x2="120" y2="56"/><line x1="20" y1="82" x2="120" y2="82"/><line x1="20" y1="108" x2="120" y2="108"/><line x1="20" y1="134" x2="120" y2="134"/></g>
-  <g stroke="#4E6B5E" stroke-width="1"><line x1="20" y1="32" x2="20" y2="134"/><line x1="40" y1="32" x2="40" y2="134"/><line x1="60" y1="32" x2="60" y2="134"/><line x1="80" y1="32" x2="80" y2="134"/><line x1="100" y1="32" x2="100" y2="134"/><line x1="120" y1="32" x2="120" y2="134"/></g>
-  <g fill="#C88B4E"><circle cx="20" cy="95" r="7"/><circle cx="40" cy="69" r="7"/><circle cx="120" cy="95" r="7"/></g>
-        </svg>
-          <p class="fret-shape">3-2-0-0-0-3</p>
-          <p class="fret-meta"><span class="fret-fingers">three</span> &middot; G B D G B G</p>
-          <p class="fret-gloss">The shape everyone learns first.</p>
-        </figure>
-
-        <figure class="fret">
-          <figcaption>
-            <span class="fret-name">Drop D</span>
-            <span class="fret-strings">D A D G B E</span>
-          </figcaption>
-          <svg viewBox="0 0 140 140" role="img" aria-label="G in Drop D: 5-2-0-0-0-3">
-  <g fill="none" stroke="#8AA08D" stroke-width="1.5"><circle cx="60" cy="18" r="4"/><circle cx="80" cy="18" r="4"/><circle cx="100" cy="18" r="4"/></g>
-  <line x1="20" y1="30" x2="120" y2="30" stroke="#1C5949" stroke-width="1"/>
-  <text x="8" y="48" fill="#8AA08D" font-family="monospace" font-size="9" text-anchor="middle">2</text>
-  <g stroke="#1C5949" stroke-width="1"><line x1="20" y1="56" x2="120" y2="56"/><line x1="20" y1="82" x2="120" y2="82"/><line x1="20" y1="108" x2="120" y2="108"/><line x1="20" y1="134" x2="120" y2="134"/></g>
-  <g stroke="#4E6B5E" stroke-width="1"><line x1="20" y1="32" x2="20" y2="134"/><line x1="40" y1="32" x2="40" y2="134"/><line x1="60" y1="32" x2="60" y2="134"/><line x1="80" y1="32" x2="80" y2="134"/><line x1="100" y1="32" x2="100" y2="134"/><line x1="120" y1="32" x2="120" y2="134"/></g>
-  <g fill="#C88B4E"><circle cx="20" cy="121" r="7"/><circle cx="40" cy="43" r="7"/><circle cx="120" cy="69" r="7"/></g>
-        </svg>
-          <p class="fret-shape">5-2-0-0-0-3</p>
-          <p class="fret-meta"><span class="fret-fingers">three</span> &middot; G B D G B G</p>
-          <p class="fret-gloss">The same notes, but a stretch to the fifth fret.</p>
-        </figure>
+  <section class="feat" id="tunings">
+    <p class="eyebrow">Tuner &amp; tunings</p>
+    <h2>Found a tuning you love, and your tuner has never heard of it?</h2>
+    <div class="panel split">
+      <div>
+        <p class="sub-h">The library, by family</p>
+<!-- GENERATED:families -->
+<!-- generated by tools/build-visuals.mjs from the app at feature/more-tunings f6eeb95: TUNING_LIBRARY, byCategory(). Do not edit by hand; re-run the script. -->
+<div class="families"><div class="fam"><p class="fam-name">Standard &amp; shifts <span class="fam-count">8</span></p><svg class="viz fam-sq" viewBox="0 0 140 14" width="140" height="14" role="img" aria-labelledby="v-1-t v-1-d" xmlns="http://www.w3.org/2000/svg"><title id="v-1-t">8 tunings</title><desc id="v-1-d">8 squares, one per tuning in this family.</desc><rect x="0" y="0" width="14" height="14" fill="#F2EEE4"/><rect x="18" y="0" width="14" height="14" fill="#C88B4E"/><rect x="36" y="0" width="14" height="14" fill="#C88B4E"/><rect x="54" y="0" width="14" height="14" fill="#C88B4E"/><rect x="72" y="0" width="14" height="14" fill="#C88B4E"/><rect x="90" y="0" width="14" height="14" fill="#C88B4E"/><rect x="108" y="0" width="14" height="14" fill="#C88B4E"/><rect x="126" y="0" width="14" height="14" fill="#C88B4E"/></svg><p class="fam-list">Standard, F Standard, E♭ Standard, D Standard, C♯ Standard, C Standard, B Standard, A Standard</p></div><div class="fam"><p class="fam-name">Dropped <span class="fam-count">9</span></p><svg class="viz fam-sq" viewBox="0 0 158 14" width="158" height="14" role="img" aria-labelledby="v-2-t v-2-d" xmlns="http://www.w3.org/2000/svg"><title id="v-2-t">9 tunings</title><desc id="v-2-d">9 squares, one per tuning in this family.</desc><rect x="0" y="0" width="14" height="14" fill="#C88B4E"/><rect x="18" y="0" width="14" height="14" fill="#C88B4E"/><rect x="36" y="0" width="14" height="14" fill="#C88B4E"/><rect x="54" y="0" width="14" height="14" fill="#C88B4E"/><rect x="72" y="0" width="14" height="14" fill="#C88B4E"/><rect x="90" y="0" width="14" height="14" fill="#C88B4E"/><rect x="108" y="0" width="14" height="14" fill="#C88B4E"/><rect x="126" y="0" width="14" height="14" fill="#C88B4E"/><rect x="144" y="0" width="14" height="14" fill="#C88B4E"/></svg><p class="fam-list">Drop D, Double Drop D, Drop E♭, Drop C, Double Drop C, Drop C♯, Drop B, Drop B♭, Drop A</p></div><div class="fam"><p class="fam-name">Open <span class="fam-count">19</span></p><svg class="viz fam-sq" viewBox="0 0 338 14" width="338" height="14" role="img" aria-labelledby="v-3-t v-3-d" xmlns="http://www.w3.org/2000/svg"><title id="v-3-t">19 tunings</title><desc id="v-3-d">19 squares, one per tuning in this family.</desc><rect x="0" y="0" width="14" height="14" fill="#C88B4E"/><rect x="18" y="0" width="14" height="14" fill="#C88B4E"/><rect x="36" y="0" width="14" height="14" fill="#C88B4E"/><rect x="54" y="0" width="14" height="14" fill="#C88B4E"/><rect x="72" y="0" width="14" height="14" fill="#C88B4E"/><rect x="90" y="0" width="14" height="14" fill="#C88B4E"/><rect x="108" y="0" width="14" height="14" fill="#C88B4E"/><rect x="126" y="0" width="14" height="14" fill="#C88B4E"/><rect x="144" y="0" width="14" height="14" fill="#C88B4E"/><rect x="162" y="0" width="14" height="14" fill="#C88B4E"/><rect x="180" y="0" width="14" height="14" fill="#C88B4E"/><rect x="198" y="0" width="14" height="14" fill="#C88B4E"/><rect x="216" y="0" width="14" height="14" fill="#C88B4E"/><rect x="234" y="0" width="14" height="14" fill="#C88B4E"/><rect x="252" y="0" width="14" height="14" fill="#C88B4E"/><rect x="270" y="0" width="14" height="14" fill="#C88B4E"/><rect x="288" y="0" width="14" height="14" fill="#C88B4E"/><rect x="306" y="0" width="14" height="14" fill="#C88B4E"/><rect x="324" y="0" width="14" height="14" fill="#C88B4E"/></svg><p class="fam-list">Open D, Open D minor, Open D6, Open E♭, Open E, Open E minor, Open G, Open G minor, Open G6, Open A, Open A minor, Open C, Open C minor, Open C6, Open F, Open F minor, C F C F A F, Open B, Open B minor</p></div><div class="fam"><p class="fam-name">Modal <span class="fam-count">11</span></p><svg class="viz fam-sq" viewBox="0 0 194 14" width="194" height="14" role="img" aria-labelledby="v-4-t v-4-d" xmlns="http://www.w3.org/2000/svg"><title id="v-4-t">11 tunings</title><desc id="v-4-d">11 squares, one per tuning in this family.</desc><rect x="0" y="0" width="14" height="14" fill="#C88B4E"/><rect x="18" y="0" width="14" height="14" fill="#C88B4E"/><rect x="36" y="0" width="14" height="14" fill="#C88B4E"/><rect x="54" y="0" width="14" height="14" fill="#C88B4E"/><rect x="72" y="0" width="14" height="14" fill="#C88B4E"/><rect x="90" y="0" width="14" height="14" fill="#C88B4E"/><rect x="108" y="0" width="14" height="14" fill="#C88B4E"/><rect x="126" y="0" width="14" height="14" fill="#C88B4E"/><rect x="144" y="0" width="14" height="14" fill="#C88B4E"/><rect x="162" y="0" width="14" height="14" fill="#C88B4E"/><rect x="180" y="0" width="14" height="14" fill="#C88B4E"/></svg><p class="fam-list">DADGAD, Orkney, Sawmill, D G C G C D, Dsus2, Open Csus2, D A D E A D, Open Gsus2, Open Asus2, Open Asus4, Open C5</p></div><div class="fam"><p class="fam-name">Other <span class="fam-count">5</span></p><svg class="viz fam-sq" viewBox="0 0 86 14" width="86" height="14" role="img" aria-labelledby="v-5-t v-5-d" xmlns="http://www.w3.org/2000/svg"><title id="v-5-t">5 tunings</title><desc id="v-5-d">5 squares, one per tuning in this family.</desc><rect x="0" y="0" width="14" height="14" fill="#C88B4E"/><rect x="18" y="0" width="14" height="14" fill="#C88B4E"/><rect x="36" y="0" width="14" height="14" fill="#C88B4E"/><rect x="54" y="0" width="14" height="14" fill="#C88B4E"/><rect x="72" y="0" width="14" height="14" fill="#C88B4E"/></svg><p class="fam-list">All Fourths, Major Thirds, Tritones, C G C F C E, C G D G B D</p></div></div>
+<p class="fam-note">One square for each of the 52; the cream one is Standard.</p>
+<!-- /GENERATED:families -->
+      </div>
+      <div>
+        <p class="sub-h">The same G, three tunings</p>
+<!-- GENERATED:threeTunings -->
+<!-- generated by tools/build-visuals.mjs from the app at feature/more-tunings f6eeb95: findVoicings(parseChordSymbol('G'), resolveTuning(name))[0], dotFill(). Do not edit by hand; re-run the script. -->
+<div class="minirow"><figure class="mini"><figcaption><span class="mini-name">Standard</span><span class="mini-sub">E A D G B E</span></figcaption><svg class="viz chord" viewBox="0 0 140 150" width="140" height="150" role="img" aria-labelledby="v-6-t v-6-d" xmlns="http://www.w3.org/2000/svg"><title id="v-6-t">G in Standard</title><desc id="v-6-d">Frets low string to high: 3-2-0-0-0-3. Root notes copper, other chord tones cream.</desc><circle cx="62" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><circle cx="81" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><circle cx="100" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><rect x="22" y="29" width="99" height="4" fill="#C8D2B4"/><line x1="24" y1="59" x2="119" y2="59" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="86" x2="119" y2="86" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="113" x2="119" y2="113" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="140" x2="119" y2="140" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="32" x2="24" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="43" y1="32" x2="43" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="62" y1="32" x2="62" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="81" y1="32" x2="81" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="100" y1="32" x2="100" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="119" y1="32" x2="119" y2="140" stroke="#657A6D" stroke-width="1.2"/><circle cx="24" cy="99.5" r="7" fill="#C88B4E"/><circle cx="43" cy="72.5" r="7" fill="#F2EEE4"/><circle cx="119" cy="99.5" r="7" fill="#C88B4E"/></svg><p class="mini-shape">3-2-0-0-0-3</p><p class="mini-meta">three fingers</p></figure><figure class="mini"><figcaption><span class="mini-name">DADGAD</span><span class="mini-sub">D A D G A D</span></figcaption><svg class="viz chord" viewBox="0 0 140 150" width="140" height="150" role="img" aria-labelledby="v-7-t v-7-d" xmlns="http://www.w3.org/2000/svg"><title id="v-7-t">G in DADGAD</title><desc id="v-7-d">Frets low string to high: 0-2-0-0-2-0. Root notes copper, other chord tones cream.</desc><circle cx="24" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><circle cx="62" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><circle cx="81" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><circle cx="119" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><rect x="22" y="29" width="99" height="4" fill="#C8D2B4"/><line x1="24" y1="59" x2="119" y2="59" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="86" x2="119" y2="86" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="113" x2="119" y2="113" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="140" x2="119" y2="140" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="32" x2="24" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="43" y1="32" x2="43" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="62" y1="32" x2="62" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="81" y1="32" x2="81" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="100" y1="32" x2="100" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="119" y1="32" x2="119" y2="140" stroke="#657A6D" stroke-width="1.2"/><circle cx="43" cy="72.5" r="7" fill="#F2EEE4"/><circle cx="100" cy="72.5" r="7" fill="#F2EEE4"/></svg><p class="mini-shape">0-2-0-0-2-0</p><p class="mini-meta">two fingers</p></figure><figure class="mini"><figcaption><span class="mini-name">Open G</span><span class="mini-sub">D G D G B D</span></figcaption><svg class="viz chord" viewBox="0 0 140 150" width="140" height="150" role="img" aria-labelledby="v-8-t v-8-d" xmlns="http://www.w3.org/2000/svg"><title id="v-8-t">G in Open G</title><desc id="v-8-d">Frets low string to high: x-0-0-0-0-0. Root notes copper, other chord tones cream.</desc><path d="M20 14l8 8m0 -8l-8 8" stroke="#B8A693" stroke-width="1.6" fill="none"/><circle cx="43" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><circle cx="62" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><circle cx="81" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><circle cx="100" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><circle cx="119" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><rect x="22" y="29" width="99" height="4" fill="#C8D2B4"/><line x1="24" y1="59" x2="119" y2="59" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="86" x2="119" y2="86" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="113" x2="119" y2="113" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="140" x2="119" y2="140" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="32" x2="24" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="43" y1="32" x2="43" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="62" y1="32" x2="62" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="81" y1="32" x2="81" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="100" y1="32" x2="100" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="119" y1="32" x2="119" y2="140" stroke="#657A6D" stroke-width="1.2"/></svg><p class="mini-shape">x-0-0-0-0-0</p><p class="mini-meta">no fingers</p></figure></div>
+<!-- /GENERATED:threeTunings -->
+      </div>
     </div>
-    <p class="verdict">Zero shapes in common. Four different instruments.</p>
+    <div class="feat-body">
+      <p>52 tunings, from Standard to open and modal.</p>
+      <!-- APPROVED by the owner 2026-11-22 -->
+      <p>A few need heavier or special strings, and Sitka tells you which before you tune up.</p>
+    </div>
   </section>
 
-
-
-  <div class="divider rule" role="separator"><span></span></div>
-
-  <!--
-    The six screens, from the store shoot on versionCode 27 (2026-10-28),
-    1080x2400 WebP. Each note says what the screen is, written from the
-    screenshot rather than from memory. First two eager, the rest lazy:
-    only the first two are near the fold.
-  -->
-  <section class="feature wide" id="screens">
-    <p class="eyebrow">Inside the app</p>
-    <h2>Five tabs that share one tuning</h2>
-    <p class="lede-wide">
-      Metronome, Tuner, Chords, Writer and Voice. The tuning you pick in one
-      is the tuning the others work in.
-    </p>
-    <ul class="shots">
-        <li class="shot">
-          <img src="/assets/screen-1-tuner.webp" alt="The tuner in Standard reading the G string: a dot near the top of an arc from flat to sharp, a large G, IN TUNE at minus 4 cents, and the six string buttons below"
-               width="1080" height="2400" decoding="async">
-          <p class="shot-note">The tuner, mid-pluck on the G string. A dot rides the arc and settles into the green band when you&rsquo;re in tune. Prefer a straight bar, or both at once? It&rsquo;s a long-press away. Pick another tuning and the strings, the readout and every chord shape change with it.</p>
-        </li>
-        <li class="shot">
-          <img src="/assets/screen-2-explore.webp" alt="Explore: a guitar neck in DADGAD with a capo on 2 and two fretted notes, named G and sounding A, with a stack of G, Asus4 and D below it"
-               width="1080" height="2400" decoding="async">
-          <p class="shot-note">Explore: a guitar neck you fret with a fingertip. Tap out a shape and Sitka names it (here a G shape in DADGAD with a capo on 2, sounding A), then strums it back to you. Stack a few and send them straight into a song.</p>
-        </li>
-        <li class="shot">
-          <img src="/assets/screen-3-browse.webp" alt="The chord browser in Standard, key of G: seven chord diagrams in a grid, each with its name, Roman numeral and a tag such as OPEN"
-               width="1080" height="2400" loading="lazy" decoding="async">
-          <p class="shot-note">Every chord in a key as a diagram, worked out for your tuning and capo, with its Roman numeral. Tap one to see every way to play it, ranked.</p>
-        </li>
-        <li class="shot">
-          <img src="/assets/screen-4-writer.webp" alt="The song editor for Harbour Light in G major at capo 2: chord names above the lyrics, a syllable count beside each line, and Verse and Chorus sections"
-               width="1080" height="2400" loading="lazy" decoding="async">
-          <p class="shot-note">Chords sit above the words where you put them, with a syllable count on every line and sections you can add and reorder. Export as ChordPro or plain text whenever you like.</p>
-        </li>
-        <li class="shot">
-          <img src="/assets/screen-5-perform.webp" alt="Perform: Harbour Light at capo 2 in large type on a paper-coloured page, chords above the words, with pause, sync, tempo 84, click and speed controls below"
-               width="1080" height="2400" loading="lazy" decoding="async">
-          <p class="shot-note">Perform scrolls the song at your tempo, after a count-in, so you can play it through without touching the screen.</p>
-        </li>
-        <li class="shot">
-          <img src="/assets/screen-6-capo.webp" alt="The capo sheet over a song: capo 2 selected, a SHAPE or SOUNDS switch for chord names, and three suggested capo positions with how many chords are open at each"
-               width="1080" height="2400" loading="lazy" decoding="async">
-          <p class="shot-note">Set a capo and every shape is worked out from it. Not sure where it goes? Sitka suggests the spots that turn the most chords into open shapes.</p>
-        </li>
-    </ul>
+  <section class="feat" id="chords">
+    <p class="eyebrow">Chords</p>
+    <h2>Capo on 2 in DADGAD, and no chord chart for it?</h2>
+    <div class="pair">
+      <div class="panel">
+<!-- GENERATED:chordSet -->
+<!-- generated by tools/build-visuals.mjs from the app at feature/more-tunings f6eeb95: diatonicChords(E, Ionian) triads, findVoicings(c, capoTuning(DADGAD, 2), { maxFret: capoMaxFret(2) })[0], shapeSymbol(). Do not edit by hand; re-run the script. -->
+<p class="viz-cap">DADGAD, capo 2: the first shape for each chord in the key. You play D shapes; it sounds in E.</p>
+<div class="minirow six"><figure class="mini"><figcaption><span class="mini-name">D</span><span class="mini-sub">I</span></figcaption><svg class="viz chord" viewBox="0 0 140 150" width="140" height="150" role="img" aria-labelledby="v-9-t v-9-d" xmlns="http://www.w3.org/2000/svg"><title id="v-9-t">D shape, capo 2, DADGAD</title><desc id="v-9-d">Frets low string to high: 0-0-0-2-0-4. Root notes copper, other chord tones cream.</desc><circle cx="24" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><circle cx="43" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><circle cx="62" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><circle cx="100" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><rect x="22" y="29" width="99" height="4" fill="#C8D2B4"/><line x1="24" y1="59" x2="119" y2="59" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="86" x2="119" y2="86" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="113" x2="119" y2="113" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="140" x2="119" y2="140" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="32" x2="24" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="43" y1="32" x2="43" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="62" y1="32" x2="62" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="81" y1="32" x2="81" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="100" y1="32" x2="100" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="119" y1="32" x2="119" y2="140" stroke="#657A6D" stroke-width="1.2"/><circle cx="81" cy="72.5" r="7" fill="#F2EEE4"/><circle cx="119" cy="126.5" r="7" fill="#F2EEE4"/></svg><p class="mini-shape">0-0-0-2-0-4</p><p class="mini-meta">sounds E</p></figure><figure class="mini"><figcaption><span class="mini-name">Em</span><span class="mini-sub">ii</span></figcaption><svg class="viz chord" viewBox="0 0 140 150" width="140" height="150" role="img" aria-labelledby="v-10-t v-10-d" xmlns="http://www.w3.org/2000/svg"><title id="v-10-t">Em shape, capo 2, DADGAD</title><desc id="v-10-d">Frets low string to high: 2-2-2-0-2-x. Root notes copper, other chord tones cream.</desc><circle cx="81" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><path d="M115 14l8 8m0 -8l-8 8" stroke="#B8A693" stroke-width="1.6" fill="none"/><rect x="22" y="29" width="99" height="4" fill="#C8D2B4"/><line x1="24" y1="59" x2="119" y2="59" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="86" x2="119" y2="86" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="113" x2="119" y2="113" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="140" x2="119" y2="140" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="32" x2="24" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="43" y1="32" x2="43" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="62" y1="32" x2="62" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="81" y1="32" x2="81" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="100" y1="32" x2="100" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="119" y1="32" x2="119" y2="140" stroke="#657A6D" stroke-width="1.2"/><rect x="17" y="65.5" width="52" height="14" rx="7" fill="#F2EEE4"/><circle cx="24" cy="72.5" r="7" fill="#C88B4E"/><circle cx="43" cy="72.5" r="7" fill="#F2EEE4"/><circle cx="62" cy="72.5" r="7" fill="#C88B4E"/><circle cx="100" cy="72.5" r="7" fill="#F2EEE4"/></svg><p class="mini-shape">2-2-2-0-2-x</p><p class="mini-meta">sounds F♯m</p></figure><figure class="mini"><figcaption><span class="mini-name">F♯m</span><span class="mini-sub">iii</span></figcaption><svg class="viz chord" viewBox="0 0 140 150" width="140" height="150" role="img" aria-labelledby="v-11-t v-11-d" xmlns="http://www.w3.org/2000/svg"><title id="v-11-t">F♯m shape, capo 2, DADGAD</title><desc id="v-11-d">Frets low string to high: 4-0-4-2-4-x. Root notes copper, other chord tones cream.</desc><circle cx="43" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><path d="M115 14l8 8m0 -8l-8 8" stroke="#B8A693" stroke-width="1.6" fill="none"/><rect x="22" y="29" width="99" height="4" fill="#C8D2B4"/><line x1="24" y1="59" x2="119" y2="59" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="86" x2="119" y2="86" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="113" x2="119" y2="113" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="140" x2="119" y2="140" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="32" x2="24" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="43" y1="32" x2="43" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="62" y1="32" x2="62" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="81" y1="32" x2="81" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="100" y1="32" x2="100" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="119" y1="32" x2="119" y2="140" stroke="#657A6D" stroke-width="1.2"/><circle cx="24" cy="126.5" r="7" fill="#C88B4E"/><circle cx="62" cy="126.5" r="7" fill="#C88B4E"/><circle cx="81" cy="72.5" r="7" fill="#F2EEE4"/><circle cx="100" cy="126.5" r="7" fill="#F2EEE4"/></svg><p class="mini-shape">4-0-4-2-4-x</p><p class="mini-meta">sounds G♯m</p></figure><figure class="mini"><figcaption><span class="mini-name">G</span><span class="mini-sub">IV</span></figcaption><svg class="viz chord" viewBox="0 0 140 150" width="140" height="150" role="img" aria-labelledby="v-12-t v-12-d" xmlns="http://www.w3.org/2000/svg"><title id="v-12-t">G shape, capo 2, DADGAD</title><desc id="v-12-d">Frets low string to high: 0-2-0-0-2-0. Root notes copper, other chord tones cream.</desc><circle cx="24" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><circle cx="62" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><circle cx="81" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><circle cx="119" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><rect x="22" y="29" width="99" height="4" fill="#C8D2B4"/><line x1="24" y1="59" x2="119" y2="59" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="86" x2="119" y2="86" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="113" x2="119" y2="113" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="140" x2="119" y2="140" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="32" x2="24" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="43" y1="32" x2="43" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="62" y1="32" x2="62" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="81" y1="32" x2="81" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="100" y1="32" x2="100" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="119" y1="32" x2="119" y2="140" stroke="#657A6D" stroke-width="1.2"/><circle cx="43" cy="72.5" r="7" fill="#F2EEE4"/><circle cx="100" cy="72.5" r="7" fill="#F2EEE4"/></svg><p class="mini-shape">0-2-0-0-2-0</p><p class="mini-meta">sounds A</p></figure><figure class="mini"><figcaption><span class="mini-name">A</span><span class="mini-sub">V</span></figcaption><svg class="viz chord" viewBox="0 0 140 150" width="140" height="150" role="img" aria-labelledby="v-13-t v-13-d" xmlns="http://www.w3.org/2000/svg"><title id="v-13-t">A shape, capo 2, DADGAD</title><desc id="v-13-d">Frets low string to high: x-0-2-2-4-x. Root notes copper, other chord tones cream.</desc><path d="M20 14l8 8m0 -8l-8 8" stroke="#B8A693" stroke-width="1.6" fill="none"/><circle cx="43" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><path d="M115 14l8 8m0 -8l-8 8" stroke="#B8A693" stroke-width="1.6" fill="none"/><rect x="22" y="29" width="99" height="4" fill="#C8D2B4"/><line x1="24" y1="59" x2="119" y2="59" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="86" x2="119" y2="86" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="113" x2="119" y2="113" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="140" x2="119" y2="140" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="32" x2="24" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="43" y1="32" x2="43" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="62" y1="32" x2="62" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="81" y1="32" x2="81" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="100" y1="32" x2="100" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="119" y1="32" x2="119" y2="140" stroke="#657A6D" stroke-width="1.2"/><circle cx="62" cy="72.5" r="7" fill="#F2EEE4"/><circle cx="81" cy="72.5" r="7" fill="#C88B4E"/><circle cx="100" cy="126.5" r="7" fill="#F2EEE4"/></svg><p class="mini-shape">x-0-2-2-4-x</p><p class="mini-meta">sounds B</p></figure><figure class="mini"><figcaption><span class="mini-name">Bm</span><span class="mini-sub">vi</span></figcaption><svg class="viz chord" viewBox="0 0 140 150" width="140" height="150" role="img" aria-labelledby="v-14-t v-14-d" xmlns="http://www.w3.org/2000/svg"><title id="v-14-t">Bm shape, capo 2, DADGAD</title><desc id="v-14-d">Frets low string to high: x-2-4-4-2-0. Root notes copper, other chord tones cream.</desc><path d="M20 14l8 8m0 -8l-8 8" stroke="#B8A693" stroke-width="1.6" fill="none"/><circle cx="119" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><rect x="22" y="29" width="99" height="4" fill="#C8D2B4"/><line x1="24" y1="59" x2="119" y2="59" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="86" x2="119" y2="86" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="113" x2="119" y2="113" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="140" x2="119" y2="140" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="32" x2="24" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="43" y1="32" x2="43" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="62" y1="32" x2="62" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="81" y1="32" x2="81" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="100" y1="32" x2="100" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="119" y1="32" x2="119" y2="140" stroke="#657A6D" stroke-width="1.2"/><rect x="36" y="65.5" width="71" height="14" rx="7" fill="#F2EEE4"/><circle cx="43" cy="72.5" r="7" fill="#C88B4E"/><circle cx="62" cy="126.5" r="7" fill="#F2EEE4"/><circle cx="81" cy="126.5" r="7" fill="#C88B4E"/><circle cx="100" cy="72.5" r="7" fill="#C88B4E"/></svg><p class="mini-shape">x-2-4-4-2-0</p><p class="mini-meta">sounds C♯m</p></figure></div>
+<!-- /GENERATED:chordSet -->
+      </div>
+      <!-- SCREENSHOT: the chord browser, from store/play/phone-v2 (vc50) -->
+      <div class="ph" role="img" aria-label="Placeholder for a screenshot of the chord browser">
+        <span class="ph-tag">Placeholder</span>
+        <span class="ph-title">Screenshot: Chords</span>
+        <span class="ph-what">A key&rsquo;s chords as diagrams, for the tuning and capo</span>
+        <span class="ph-file">store/play/phone-v2 &middot; vc50</span>
+      </div>
+    </div>
+    <div class="feat-body">
+      <p>Every chord in a key, worked out for your tuning and capo, the easiest shape first.</p>
+      <p>Fret a shape on the neck and Sitka names it.</p>
+    </div>
   </section>
 
+  <section class="feat" id="scales">
+    <p class="eyebrow">Scales</p>
+    <h2>Know a scale in Standard, and lose it the moment you retune?</h2>
+    <div class="panel">
+<!-- GENERATED:scale -->
+<!-- generated by tools/build-visuals.mjs from the app at feature/more-tunings f6eeb95: scaleNeck(DADGAD, capo 0, D, 'blues'), scalePositions()[0], ROLE_FILL. Do not edit by hand; re-run the script. -->
+<svg class="viz neck neck-h fit" viewBox="0 0 242 200" width="242" height="200" role="img" aria-labelledby="v-15-t v-15-d" xmlns="http://www.w3.org/2000/svg"><title id="v-15-t">D blues, position 1, in DADGAD</title><desc id="v-15-d">13 notes in frets 0 to 3, each labelled with its scale degree.</desc><circle cx="159" cy="89" r="4" fill="#4A3120"/><line x1="44" y1="164" x2="44" y2="14" stroke="#C8D2B4" stroke-width="5"/><line x1="90" y1="164" x2="90" y2="14" stroke="#8A5A32" stroke-width="1.3"/><line x1="136" y1="164" x2="136" y2="14" stroke="#8A5A32" stroke-width="1.3"/><line x1="182" y1="164" x2="182" y2="14" stroke="#8A5A32" stroke-width="1.3"/><line x1="228" y1="164" x2="228" y2="14" stroke="#8A5A32" stroke-width="1.3"/><line x1="18" y1="164" x2="228" y2="164" stroke="#657A6D" stroke-width="1.9"/><line x1="18" y1="134" x2="228" y2="134" stroke="#657A6D" stroke-width="1.7"/><line x1="18" y1="104" x2="228" y2="104" stroke="#657A6D" stroke-width="1.5"/><line x1="18" y1="74" x2="228" y2="74" stroke="#657A6D" stroke-width="1.4"/><line x1="18" y1="44" x2="228" y2="44" stroke="#657A6D" stroke-width="1.2"/><line x1="18" y1="14" x2="228" y2="14" stroke="#657A6D" stroke-width="1"/><text x="67" y="194" fill="#A68E74" font-size="11" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">1</text><text x="113" y="194" fill="#A68E74" font-size="11" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">2</text><text x="159" y="194" fill="#A68E74" font-size="11" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">3</text><text x="205" y="194" fill="#A68E74" font-size="11" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">4</text><circle cx="28" cy="164" r="11" fill="#C88B4E"/><text x="28" y="168.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">1</text><circle cx="159" cy="164" r="11" fill="#F2EEE4"/><text x="159" y="167.6" fill="#0E0A05" font-size="10" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">♭3</text><circle cx="28" cy="134" r="11" fill="#F2EEE4"/><text x="28" y="138.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">5</text><circle cx="159" cy="134" r="11" fill="#879689"/><text x="159" y="137.6" fill="#0E0A05" font-size="10" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">♭7</text><circle cx="28" cy="104" r="11" fill="#C88B4E"/><text x="28" y="108.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">1</text><circle cx="159" cy="104" r="11" fill="#F2EEE4"/><text x="159" y="107.6" fill="#0E0A05" font-size="10" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">♭3</text><circle cx="28" cy="74" r="11" fill="#879689"/><text x="28" y="78.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">4</text><circle cx="67" cy="74" r="11" fill="#8295A8"/><text x="67" y="77.6" fill="#0E0A05" font-size="10" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">♭5</text><circle cx="113" cy="74" r="11" fill="#F2EEE4"/><text x="113" y="78.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">5</text><circle cx="28" cy="44" r="11" fill="#F2EEE4"/><text x="28" y="48.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">5</text><circle cx="159" cy="44" r="11" fill="#879689"/><text x="159" y="47.6" fill="#0E0A05" font-size="10" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">♭7</text><circle cx="28" cy="14" r="11" fill="#C88B4E"/><text x="28" y="18.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">1</text><circle cx="159" cy="14" r="11" fill="#F2EEE4"/><text x="159" y="17.6" fill="#0E0A05" font-size="10" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">♭3</text></svg><p class="viz-cap">D blues, position 1, in DADGAD, frets 0&ndash;3.</p><ul class="legend"><li><span class="swatch" style="background:#C88B4E"></span>root</li><li><span class="swatch" style="background:#F2EEE4"></span>chord tone</li><li><span class="swatch" style="background:#879689"></span>passing</li><li><span class="swatch" style="background:#8295A8"></span>blue note</li></ul>
+<!-- /GENERATED:scale -->
+    </div>
+    <div class="feat-body">
+      <p>Scales on the neck in any tuning, in positions Sitka works out for that tuning.</p>
+    </div>
+  </section>
 
+  <section class="feat" id="across">
+    <p class="eyebrow">Across the neck</p>
+    <h2>Stuck playing in the same four frets?</h2>
+    <div class="panel">
+<!-- GENERATED:across -->
+<!-- generated by tools/build-visuals.mjs from the app at feature/more-tunings f6eeb95: linkedRuns(scalePositions(scaleNeck(Standard, A, minorPentatonic)))[0], the steps going up. Do not edit by hand; re-run the script. -->
+<svg class="viz neck neck-h " viewBox="0 0 472 200" width="472" height="200" role="img" aria-labelledby="v-16-t v-16-d" xmlns="http://www.w3.org/2000/svg"><title id="v-16-t">A minor pentatonic, linked positions 1 to 3, in Standard</title><desc id="v-16-d">14 notes up the neck from fret 0 to 8, each with the finger that plays it; 2 slides between positions.</desc><circle cx="159" cy="89" r="4" fill="#4A3120"/><circle cx="251" cy="89" r="4" fill="#4A3120"/><circle cx="343" cy="89" r="4" fill="#4A3120"/><circle cx="435" cy="89" r="4" fill="#4A3120"/><line x1="44" y1="164" x2="44" y2="14" stroke="#C8D2B4" stroke-width="5"/><line x1="90" y1="164" x2="90" y2="14" stroke="#8A5A32" stroke-width="1.3"/><line x1="136" y1="164" x2="136" y2="14" stroke="#8A5A32" stroke-width="1.3"/><line x1="182" y1="164" x2="182" y2="14" stroke="#8A5A32" stroke-width="1.3"/><line x1="228" y1="164" x2="228" y2="14" stroke="#8A5A32" stroke-width="1.3"/><line x1="274" y1="164" x2="274" y2="14" stroke="#8A5A32" stroke-width="1.3"/><line x1="320" y1="164" x2="320" y2="14" stroke="#8A5A32" stroke-width="1.3"/><line x1="366" y1="164" x2="366" y2="14" stroke="#8A5A32" stroke-width="1.3"/><line x1="412" y1="164" x2="412" y2="14" stroke="#8A5A32" stroke-width="1.3"/><line x1="458" y1="164" x2="458" y2="14" stroke="#8A5A32" stroke-width="1.3"/><line x1="18" y1="164" x2="458" y2="164" stroke="#657A6D" stroke-width="1.9"/><line x1="18" y1="134" x2="458" y2="134" stroke="#657A6D" stroke-width="1.7"/><line x1="18" y1="104" x2="458" y2="104" stroke="#657A6D" stroke-width="1.5"/><line x1="18" y1="74" x2="458" y2="74" stroke="#657A6D" stroke-width="1.4"/><line x1="18" y1="44" x2="458" y2="44" stroke="#657A6D" stroke-width="1.2"/><line x1="18" y1="14" x2="458" y2="14" stroke="#657A6D" stroke-width="1"/><text x="67" y="194" fill="#A68E74" font-size="11" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">1</text><text x="159" y="194" fill="#A68E74" font-size="11" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">3</text><text x="251" y="194" fill="#A68E74" font-size="11" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">5</text><text x="343" y="194" fill="#A68E74" font-size="11" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">7</text><text x="435" y="194" fill="#A68E74" font-size="11" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">9</text><polyline points="28,164 159,164 28,134 159,134 251,134 113,104 251,104 113,74 251,74 343,74 251,44 389,44 251,14 389,14" fill="none" stroke="#A66E3E" stroke-width="2" stroke-linejoin="round" stroke-opacity=".8"/><line x1="159" y1="134" x2="251" y2="134" stroke="#C88B4E" stroke-width="5" stroke-linecap="round" stroke-opacity=".55"/><line x1="251" y1="74" x2="343" y2="74" stroke="#C88B4E" stroke-width="5" stroke-linecap="round" stroke-opacity=".55"/><circle cx="28" cy="164" r="11" fill="#F2EEE4"/><text x="28" y="168.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">0</text><circle cx="159" cy="164" r="11" fill="#F2EEE4"/><text x="159" y="168.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">3</text><circle cx="28" cy="134" r="11" fill="#C88B4E"/><text x="28" y="138.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">0</text><circle cx="159" cy="134" r="11" fill="#F2EEE4"/><text x="159" y="138.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">3</text><circle cx="251" cy="134" r="11" fill="#F2EEE4"/><text x="251" y="138.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">3</text><circle cx="113" cy="104" r="11" fill="#F2EEE4"/><text x="113" y="108.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">1</text><circle cx="251" cy="104" r="11" fill="#F2EEE4"/><text x="251" y="108.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">4</text><circle cx="113" cy="74" r="11" fill="#C88B4E"/><text x="113" y="78.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">1</text><circle cx="251" cy="74" r="11" fill="#F2EEE4"/><text x="251" y="78.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">4</text><circle cx="343" cy="74" r="11" fill="#F2EEE4"/><text x="343" y="78.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">4</text><circle cx="251" cy="44" r="11" fill="#F2EEE4"/><text x="251" y="48.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">1</text><circle cx="389" cy="44" r="11" fill="#F2EEE4"/><text x="389" y="48.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">4</text><circle cx="251" cy="14" r="11" fill="#C88B4E"/><text x="251" y="18.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">1</text><circle cx="389" cy="14" r="11" fill="#F2EEE4"/><text x="389" y="18.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">4</text></svg><svg class="viz neck neck-v " viewBox="0 0 220 418" width="220" height="418" role="img" aria-labelledby="v-17-t v-17-d" xmlns="http://www.w3.org/2000/svg"><title id="v-17-t">A minor pentatonic, linked positions 1 to 3, in Standard</title><desc id="v-17-d">14 notes up the neck from fret 0 to 8, each with the finger that plays it; 2 slides between positions.</desc><circle cx="121" cy="144" r="4" fill="#4A3120"/><circle cx="121" cy="224" r="4" fill="#4A3120"/><circle cx="121" cy="304" r="4" fill="#4A3120"/><circle cx="121" cy="384" r="4" fill="#4A3120"/><line x1="36" y1="44" x2="206" y2="44" stroke="#C8D2B4" stroke-width="5"/><line x1="36" y1="84" x2="206" y2="84" stroke="#8A5A32" stroke-width="1.3"/><line x1="36" y1="124" x2="206" y2="124" stroke="#8A5A32" stroke-width="1.3"/><line x1="36" y1="164" x2="206" y2="164" stroke="#8A5A32" stroke-width="1.3"/><line x1="36" y1="204" x2="206" y2="204" stroke="#8A5A32" stroke-width="1.3"/><line x1="36" y1="244" x2="206" y2="244" stroke="#8A5A32" stroke-width="1.3"/><line x1="36" y1="284" x2="206" y2="284" stroke="#8A5A32" stroke-width="1.3"/><line x1="36" y1="324" x2="206" y2="324" stroke="#8A5A32" stroke-width="1.3"/><line x1="36" y1="364" x2="206" y2="364" stroke="#8A5A32" stroke-width="1.3"/><line x1="36" y1="404" x2="206" y2="404" stroke="#8A5A32" stroke-width="1.3"/><line x1="36" y1="18" x2="36" y2="404" stroke="#657A6D" stroke-width="1.9"/><line x1="70" y1="18" x2="70" y2="404" stroke="#657A6D" stroke-width="1.7"/><line x1="104" y1="18" x2="104" y2="404" stroke="#657A6D" stroke-width="1.5"/><line x1="138" y1="18" x2="138" y2="404" stroke="#657A6D" stroke-width="1.4"/><line x1="172" y1="18" x2="172" y2="404" stroke="#657A6D" stroke-width="1.2"/><line x1="206" y1="18" x2="206" y2="404" stroke="#657A6D" stroke-width="1"/><text x="11" y="68" fill="#A68E74" font-size="11" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">1</text><text x="11" y="148" fill="#A68E74" font-size="11" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">3</text><text x="11" y="228" fill="#A68E74" font-size="11" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">5</text><text x="11" y="308" fill="#A68E74" font-size="11" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">7</text><text x="11" y="388" fill="#A68E74" font-size="11" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">9</text><polyline points="36,28 36,144 70,28 70,144 70,224 104,104 104,224 138,104 138,224 138,304 172,224 172,344 206,224 206,344" fill="none" stroke="#A66E3E" stroke-width="2" stroke-linejoin="round" stroke-opacity=".8"/><line x1="70" y1="144" x2="70" y2="224" stroke="#C88B4E" stroke-width="5" stroke-linecap="round" stroke-opacity=".55"/><line x1="138" y1="224" x2="138" y2="304" stroke="#C88B4E" stroke-width="5" stroke-linecap="round" stroke-opacity=".55"/><circle cx="36" cy="28" r="11" fill="#F2EEE4"/><text x="36" y="32.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">0</text><circle cx="36" cy="144" r="11" fill="#F2EEE4"/><text x="36" y="148.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">3</text><circle cx="70" cy="28" r="11" fill="#C88B4E"/><text x="70" y="32.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">0</text><circle cx="70" cy="144" r="11" fill="#F2EEE4"/><text x="70" y="148.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">3</text><circle cx="70" cy="224" r="11" fill="#F2EEE4"/><text x="70" y="228.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">3</text><circle cx="104" cy="104" r="11" fill="#F2EEE4"/><text x="104" y="108.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">1</text><circle cx="104" cy="224" r="11" fill="#F2EEE4"/><text x="104" y="228.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">4</text><circle cx="138" cy="104" r="11" fill="#C88B4E"/><text x="138" y="108.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">1</text><circle cx="138" cy="224" r="11" fill="#F2EEE4"/><text x="138" y="228.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">4</text><circle cx="138" cy="304" r="11" fill="#F2EEE4"/><text x="138" y="308.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">4</text><circle cx="172" cy="224" r="11" fill="#F2EEE4"/><text x="172" y="228.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">1</text><circle cx="172" cy="344" r="11" fill="#F2EEE4"/><text x="172" y="348.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">4</text><circle cx="206" cy="224" r="11" fill="#C88B4E"/><text x="206" y="228.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">1</text><circle cx="206" cy="344" r="11" fill="#F2EEE4"/><text x="206" y="348.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">4</text></svg><p class="viz-cap">A minor pentatonic, linked positions 1 to 3, in Standard: the number on each note is the finger; the copper stroke is a slide.</p>
+<!-- /GENERATED:across -->
+    </div>
+    <div class="feat-body">
+      <p>Across the neck links them into runs up the whole fretboard, with a finger for every note.</p>
+    </div>
+  </section>
 
-  <div class="divider rule" role="separator"><span></span></div>
+  <section class="feat" id="phrases">
+    <p class="eyebrow">Phrases</p>
+    <h2>Know the scale, but not what to play over the chords?</h2>
+    <div class="pair">
+      <div class="panel">
+<!-- GENERATED:phrase -->
+<!-- generated by tools/build-visuals.mjs from the app at feature/more-tunings f6eeb95: LICKS 'ba5', placements(asWritten, Standard, C)[0], harmonyOf, chordLine, lineAt, degreeOf, roleOf. Do not edit by hand; re-run the script. -->
+<p class="study-chords">over C · then F</p><svg class="viz neck neck-h fit" viewBox="0 0 426 200" width="426" height="200" role="img" aria-labelledby="v-18-t v-18-d" xmlns="http://www.w3.org/2000/svg"><title id="v-18-t">“Stepwise lullaby”, in C, on the neck in Standard</title><desc id="v-18-d">6 notes; each dot shows its degree over the chord and its place in the order.</desc><circle cx="159" cy="89" r="4" fill="#4A3120"/><circle cx="251" cy="89" r="4" fill="#4A3120"/><circle cx="343" cy="89" r="4" fill="#4A3120"/><line x1="44" y1="164" x2="44" y2="14" stroke="#C8D2B4" stroke-width="5"/><line x1="90" y1="164" x2="90" y2="14" stroke="#8A5A32" stroke-width="1.3"/><line x1="136" y1="164" x2="136" y2="14" stroke="#8A5A32" stroke-width="1.3"/><line x1="182" y1="164" x2="182" y2="14" stroke="#8A5A32" stroke-width="1.3"/><line x1="228" y1="164" x2="228" y2="14" stroke="#8A5A32" stroke-width="1.3"/><line x1="274" y1="164" x2="274" y2="14" stroke="#8A5A32" stroke-width="1.3"/><line x1="320" y1="164" x2="320" y2="14" stroke="#8A5A32" stroke-width="1.3"/><line x1="366" y1="164" x2="366" y2="14" stroke="#8A5A32" stroke-width="1.3"/><line x1="412" y1="164" x2="412" y2="14" stroke="#8A5A32" stroke-width="1.3"/><line x1="18" y1="164" x2="412" y2="164" stroke="#657A6D" stroke-width="1.9"/><line x1="18" y1="134" x2="412" y2="134" stroke="#657A6D" stroke-width="1.7"/><line x1="18" y1="104" x2="412" y2="104" stroke="#657A6D" stroke-width="1.5"/><line x1="18" y1="74" x2="412" y2="74" stroke="#657A6D" stroke-width="1.4"/><line x1="18" y1="44" x2="412" y2="44" stroke="#657A6D" stroke-width="1.2"/><line x1="18" y1="14" x2="412" y2="14" stroke="#657A6D" stroke-width="1"/><text x="67" y="194" fill="#A68E74" font-size="11" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">1</text><text x="113" y="194" fill="#A68E74" font-size="11" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">2</text><text x="159" y="194" fill="#A68E74" font-size="11" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">3</text><text x="205" y="194" fill="#A68E74" font-size="11" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">4</text><text x="251" y="194" fill="#A68E74" font-size="11" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">5</text><text x="297" y="194" fill="#A68E74" font-size="11" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">6</text><text x="343" y="194" fill="#A68E74" font-size="11" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">7</text><text x="389" y="194" fill="#A68E74" font-size="11" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">8</text><circle cx="159" cy="134" r="11" fill="#C88B4E"/><text x="159" y="138.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">R</text><text x="171" y="125" fill="#A68E74" font-size="9.5" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">1</text><circle cx="28" cy="104" r="11" fill="#879689"/><text x="28" y="108.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">9</text><text x="40" y="95" fill="#A68E74" font-size="9.5" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">2</text><circle cx="113" cy="104" r="11" fill="#F2EEE4"/><text x="113" y="108.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">3</text><text x="125" y="95" fill="#A68E74" font-size="9.5" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">3</text><circle cx="113" cy="74" r="11" fill="#879689"/><text x="113" y="78.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">6</text><text x="125" y="65" fill="#A68E74" font-size="9.5" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">4</text><circle cx="251" cy="74" r="11" fill="#F2EEE4"/><text x="251" y="78.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">5</text><text x="263" y="65" fill="#A68E74" font-size="9.5" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">5</text><circle cx="343" cy="104" r="11" fill="#F2EEE4"/><text x="343" y="108.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">3</text><text x="355" y="95" fill="#A68E74" font-size="9.5" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">6</text></svg><ol class="study-lines"><li>C: the root of C (chord tone)</li><li>D: the 9th of C, passing, resolving up to the 3rd</li><li>E: the 3rd of C (chord tone)</li><li>A: the 6th of C, passing</li><li>C: the 5th of F (chord tone)</li><li>A: the 3rd of F (chord tone)</li></ol><ul class="legend"><li><span class="swatch" style="background:#C88B4E"></span>root</li><li><span class="swatch" style="background:#F2EEE4"></span>chord tone</li><li><span class="swatch" style="background:#879689"></span>passing</li></ul>
+<!-- /GENERATED:phrase -->
+      </div>
+      <!-- SCREENSHOT: a phrase in STUDY, from store/play/phone-v2 (vc50) -->
+      <div class="ph" role="img" aria-label="Placeholder for a screenshot of a phrase in Study">
+        <span class="ph-tag">Placeholder</span>
+        <span class="ph-title">Screenshot: Phrases</span>
+        <span class="ph-what">A lick on the neck, in Study</span>
+        <span class="ph-file">store/play/phone-v2 &middot; vc50</span>
+      </div>
+    </div>
+    <div class="feat-body">
+      <p>Short licks written for Sitka, placed on your neck in any key and tuning. Sitka follows each note as you play.</p>
+      <p>Study shows the theory behind every note.</p>
+    </div>
+  </section>
 
-  <!--
-    What is in the app, one card each. Written against feature/pro and
-    release/46 (2026-11-22): tuningLibrary.ts (52), scales/fullNeck.ts,
-    scales/noteFinder.ts, phrases/ (words.ts, chains.ts, generator.ts,
-    PhraseStudy.tsx). DRAFT words, not yet approved.
-  -->
-  <section class="feature wide" id="inside">
-    <p class="eyebrow">What&rsquo;s inside</p>
-    <h2>Pick a tuning once. Everything works in it.</h2>
-    <ul class="parts">
-      <li class="part">
-        <h3>Tuner</h3>
-        <p>52 tunings, from Standard to open and modal.</p>
-        <p>Make your own a semitone at a time, or play your guitar and Sitka captures the tuning it&rsquo;s in.</p>
-        <!-- APPROVED by the owner 2026-11-22 -->
-        <p>A few need heavier or special strings, and Sitka tells you which before you tune up.</p>
-      </li>
-      <li class="part">
-        <h3>Chords</h3>
-        <p>Every chord in a key, worked out for your tuning and capo, the easiest shape first.</p>
-        <p>Fret a shape on the neck and Sitka names it.</p>
-      </li>
-      <li class="part">
-        <h3>Scales and Across the neck</h3>
-        <p>Scales on the neck in any tuning, in positions Sitka works out for that tuning.</p>
-        <p>Across the neck links them into runs up the whole fretboard, with a finger for every note.</p>
-      </li>
-      <li class="part">
-        <h3>Phrases</h3>
-        <p>Short licks written for Sitka, placed on your neck in any key and tuning. Sitka follows each note as you play.</p>
-        <p>Link licks into chains, or make a new lick with the generator. It runs on your phone, no internet needed.</p>
-        <p>Study shows the theory behind every note.</p>
-      </li>
-      <li class="part">
-        <h3>Note finder</h3>
-        <p>Learn the fretboard: find one note everywhere it falls, string by string or at random.</p>
-        <p>Sitka listens, and moves on when you find it.</p>
-      </li>
-      <li class="part">
-        <h3>Writer</h3>
-        <p>Lyrics with chords above the words, a rhyme dictionary and a syllable count on every line.</p>
-        <p>Perform scrolls the song at your tempo.</p>
-      </li>
-      <li class="part">
+  <section class="feat" id="finder">
+    <p class="eyebrow">Note finder</p>
+    <h2>Can you find every C without counting up from the nut?</h2>
+    <div class="panel">
+<!-- GENERATED:finder -->
+<!-- generated by tools/build-visuals.mjs from the app at feature/more-tunings f6eeb95: placesOn(Standard, capo 0, each string, C, 15). Do not edit by hand; re-run the script. -->
+<svg class="viz neck neck-h " viewBox="0 0 718 200" width="718" height="200" role="img" aria-labelledby="v-19-t v-19-d" xmlns="http://www.w3.org/2000/svg"><title id="v-19-t">Every C on the neck in Standard, frets 0 to 15</title><desc id="v-19-d">8 places, on all six strings.</desc><circle cx="154" cy="89" r="4" fill="#4A3120"/><circle cx="242" cy="89" r="4" fill="#4A3120"/><circle cx="330" cy="89" r="4" fill="#4A3120"/><circle cx="418" cy="89" r="4" fill="#4A3120"/><circle cx="550" cy="59" r="4" fill="#4A3120"/><circle cx="550" cy="119" r="4" fill="#4A3120"/><circle cx="682" cy="89" r="4" fill="#4A3120"/><line x1="44" y1="164" x2="44" y2="14" stroke="#C8D2B4" stroke-width="5"/><line x1="88" y1="164" x2="88" y2="14" stroke="#8A5A32" stroke-width="1.3"/><line x1="132" y1="164" x2="132" y2="14" stroke="#8A5A32" stroke-width="1.3"/><line x1="176" y1="164" x2="176" y2="14" stroke="#8A5A32" stroke-width="1.3"/><line x1="220" y1="164" x2="220" y2="14" stroke="#8A5A32" stroke-width="1.3"/><line x1="264" y1="164" x2="264" y2="14" stroke="#8A5A32" stroke-width="1.3"/><line x1="308" y1="164" x2="308" y2="14" stroke="#8A5A32" stroke-width="1.3"/><line x1="352" y1="164" x2="352" y2="14" stroke="#8A5A32" stroke-width="1.3"/><line x1="396" y1="164" x2="396" y2="14" stroke="#8A5A32" stroke-width="1.3"/><line x1="440" y1="164" x2="440" y2="14" stroke="#8A5A32" stroke-width="1.3"/><line x1="484" y1="164" x2="484" y2="14" stroke="#8A5A32" stroke-width="1.3"/><line x1="528" y1="164" x2="528" y2="14" stroke="#8A5A32" stroke-width="1.3"/><line x1="572" y1="164" x2="572" y2="14" stroke="#8A5A32" stroke-width="1.3"/><line x1="616" y1="164" x2="616" y2="14" stroke="#8A5A32" stroke-width="1.3"/><line x1="660" y1="164" x2="660" y2="14" stroke="#8A5A32" stroke-width="1.3"/><line x1="704" y1="164" x2="704" y2="14" stroke="#8A5A32" stroke-width="1.3"/><line x1="18" y1="164" x2="704" y2="164" stroke="#657A6D" stroke-width="1.9"/><line x1="18" y1="134" x2="704" y2="134" stroke="#657A6D" stroke-width="1.7"/><line x1="18" y1="104" x2="704" y2="104" stroke="#657A6D" stroke-width="1.5"/><line x1="18" y1="74" x2="704" y2="74" stroke="#657A6D" stroke-width="1.4"/><line x1="18" y1="44" x2="704" y2="44" stroke="#657A6D" stroke-width="1.2"/><line x1="18" y1="14" x2="704" y2="14" stroke="#657A6D" stroke-width="1"/><text x="66" y="194" fill="#A68E74" font-size="11" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">1</text><text x="154" y="194" fill="#A68E74" font-size="11" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">3</text><text x="242" y="194" fill="#A68E74" font-size="11" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">5</text><text x="330" y="194" fill="#A68E74" font-size="11" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">7</text><text x="418" y="194" fill="#A68E74" font-size="11" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">9</text><text x="550" y="194" fill="#A68E74" font-size="11" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">12</text><text x="682" y="194" fill="#A68E74" font-size="11" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">15</text><circle cx="374" cy="164" r="11" fill="#C88B4E"/><text x="374" y="168.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">C</text><circle cx="154" cy="134" r="11" fill="#C88B4E"/><text x="154" y="138.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">C</text><circle cx="682" cy="134" r="11" fill="#C88B4E"/><text x="682" y="138.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">C</text><circle cx="462" cy="104" r="11" fill="#C88B4E"/><text x="462" y="108.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">C</text><circle cx="242" cy="74" r="11" fill="#C88B4E"/><text x="242" y="78.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">C</text><circle cx="66" cy="44" r="11" fill="#C88B4E"/><text x="66" y="48.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">C</text><circle cx="594" cy="44" r="11" fill="#C88B4E"/><text x="594" y="48.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">C</text><circle cx="374" cy="14" r="11" fill="#C88B4E"/><text x="374" y="18.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">C</text></svg><svg class="viz neck neck-v " viewBox="0 0 220 658" width="220" height="658" role="img" aria-labelledby="v-20-t v-20-d" xmlns="http://www.w3.org/2000/svg"><title id="v-20-t">Every C on the neck in Standard, frets 0 to 15</title><desc id="v-20-d">8 places, on all six strings.</desc><circle cx="121" cy="144" r="4" fill="#4A3120"/><circle cx="121" cy="224" r="4" fill="#4A3120"/><circle cx="121" cy="304" r="4" fill="#4A3120"/><circle cx="121" cy="384" r="4" fill="#4A3120"/><circle cx="87" cy="504" r="4" fill="#4A3120"/><circle cx="155" cy="504" r="4" fill="#4A3120"/><circle cx="121" cy="624" r="4" fill="#4A3120"/><line x1="36" y1="44" x2="206" y2="44" stroke="#C8D2B4" stroke-width="5"/><line x1="36" y1="84" x2="206" y2="84" stroke="#8A5A32" stroke-width="1.3"/><line x1="36" y1="124" x2="206" y2="124" stroke="#8A5A32" stroke-width="1.3"/><line x1="36" y1="164" x2="206" y2="164" stroke="#8A5A32" stroke-width="1.3"/><line x1="36" y1="204" x2="206" y2="204" stroke="#8A5A32" stroke-width="1.3"/><line x1="36" y1="244" x2="206" y2="244" stroke="#8A5A32" stroke-width="1.3"/><line x1="36" y1="284" x2="206" y2="284" stroke="#8A5A32" stroke-width="1.3"/><line x1="36" y1="324" x2="206" y2="324" stroke="#8A5A32" stroke-width="1.3"/><line x1="36" y1="364" x2="206" y2="364" stroke="#8A5A32" stroke-width="1.3"/><line x1="36" y1="404" x2="206" y2="404" stroke="#8A5A32" stroke-width="1.3"/><line x1="36" y1="444" x2="206" y2="444" stroke="#8A5A32" stroke-width="1.3"/><line x1="36" y1="484" x2="206" y2="484" stroke="#8A5A32" stroke-width="1.3"/><line x1="36" y1="524" x2="206" y2="524" stroke="#8A5A32" stroke-width="1.3"/><line x1="36" y1="564" x2="206" y2="564" stroke="#8A5A32" stroke-width="1.3"/><line x1="36" y1="604" x2="206" y2="604" stroke="#8A5A32" stroke-width="1.3"/><line x1="36" y1="644" x2="206" y2="644" stroke="#8A5A32" stroke-width="1.3"/><line x1="36" y1="18" x2="36" y2="644" stroke="#657A6D" stroke-width="1.9"/><line x1="70" y1="18" x2="70" y2="644" stroke="#657A6D" stroke-width="1.7"/><line x1="104" y1="18" x2="104" y2="644" stroke="#657A6D" stroke-width="1.5"/><line x1="138" y1="18" x2="138" y2="644" stroke="#657A6D" stroke-width="1.4"/><line x1="172" y1="18" x2="172" y2="644" stroke="#657A6D" stroke-width="1.2"/><line x1="206" y1="18" x2="206" y2="644" stroke="#657A6D" stroke-width="1"/><text x="11" y="68" fill="#A68E74" font-size="11" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">1</text><text x="11" y="148" fill="#A68E74" font-size="11" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">3</text><text x="11" y="228" fill="#A68E74" font-size="11" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">5</text><text x="11" y="308" fill="#A68E74" font-size="11" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">7</text><text x="11" y="388" fill="#A68E74" font-size="11" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">9</text><text x="11" y="508" fill="#A68E74" font-size="11" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">12</text><text x="11" y="628" fill="#A68E74" font-size="11" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">15</text><circle cx="36" cy="344" r="11" fill="#C88B4E"/><text x="36" y="348.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">C</text><circle cx="70" cy="144" r="11" fill="#C88B4E"/><text x="70" y="148.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">C</text><circle cx="70" cy="624" r="11" fill="#C88B4E"/><text x="70" y="628.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">C</text><circle cx="104" cy="424" r="11" fill="#C88B4E"/><text x="104" y="428.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">C</text><circle cx="138" cy="224" r="11" fill="#C88B4E"/><text x="138" y="228.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">C</text><circle cx="172" cy="64" r="11" fill="#C88B4E"/><text x="172" y="68.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">C</text><circle cx="172" cy="544" r="11" fill="#C88B4E"/><text x="172" y="548.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">C</text><circle cx="206" cy="344" r="11" fill="#C88B4E"/><text x="206" y="348.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">C</text></svg><p class="viz-cap">Every C in Standard, frets 0&ndash;15: 8 places.</p>
+<!-- /GENERATED:finder -->
+    </div>
+    <div class="feat-body">
+      <p>Learn the fretboard: find one note everywhere it falls, string by string or at random.</p>
+      <p>Sitka listens, and moves on when you find it.</p>
+    </div>
+  </section>
+
+  <section class="feat" id="drills">
+    <p class="eyebrow">Finger drills</p>
+    <h2>Is your pinky always a beat behind?</h2>
+    <div class="panel">
+<!-- GENERATED:spider -->
+<!-- generated by tools/build-visuals.mjs from the app at feature/more-tunings f6eeb95: spiderSteps(scalePositions(scaleNeck(Standard, A, minorPentatonic))[0], order 1234), the way up. Do not edit by hand; re-run the script. -->
+<svg class="viz neck neck-h fit" viewBox="0 0 258 200" width="258" height="200" role="img" aria-labelledby="v-21-t v-21-d" xmlns="http://www.w3.org/2000/svg"><title id="v-21-t">The spider, 1234, frets 1 to 4</title><desc id="v-21-d">24 notes: four frets, one finger each, low string to high; the line shows the order.</desc><circle cx="160" cy="89" r="4" fill="#4A3120"/><line x1="20" y1="164" x2="20" y2="14" stroke="#8A5A32" stroke-width="1.3"/><line x1="76" y1="164" x2="76" y2="14" stroke="#8A5A32" stroke-width="1.3"/><line x1="132" y1="164" x2="132" y2="14" stroke="#8A5A32" stroke-width="1.3"/><line x1="188" y1="164" x2="188" y2="14" stroke="#8A5A32" stroke-width="1.3"/><line x1="244" y1="164" x2="244" y2="14" stroke="#8A5A32" stroke-width="1.3"/><line x1="20" y1="164" x2="244" y2="164" stroke="#657A6D" stroke-width="1.9"/><line x1="20" y1="134" x2="244" y2="134" stroke="#657A6D" stroke-width="1.7"/><line x1="20" y1="104" x2="244" y2="104" stroke="#657A6D" stroke-width="1.5"/><line x1="20" y1="74" x2="244" y2="74" stroke="#657A6D" stroke-width="1.4"/><line x1="20" y1="44" x2="244" y2="44" stroke="#657A6D" stroke-width="1.2"/><line x1="20" y1="14" x2="244" y2="14" stroke="#657A6D" stroke-width="1"/><text x="48" y="194" fill="#A68E74" font-size="11" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">1</text><text x="104" y="194" fill="#A68E74" font-size="11" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">2</text><text x="160" y="194" fill="#A68E74" font-size="11" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">3</text><text x="216" y="194" fill="#A68E74" font-size="11" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">4</text><polyline points="48,164 104,164 160,164 216,164 48,134 104,134 160,134 216,134 48,104 104,104 160,104 216,104 48,74 104,74 160,74 216,74 48,44 104,44 160,44 216,44 48,14 104,14 160,14 216,14" fill="none" stroke="#A66E3E" stroke-width="2" stroke-linejoin="round" stroke-opacity=".8"/><circle cx="48" cy="164" r="11" fill="#F2EEE4"/><text x="48" y="168.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">1</text><circle cx="104" cy="164" r="11" fill="#F2EEE4"/><text x="104" y="168.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">2</text><circle cx="160" cy="164" r="11" fill="#F2EEE4"/><text x="160" y="168.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">3</text><circle cx="216" cy="164" r="11" fill="#F2EEE4"/><text x="216" y="168.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">4</text><circle cx="48" cy="134" r="11" fill="#F2EEE4"/><text x="48" y="138.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">1</text><circle cx="104" cy="134" r="11" fill="#F2EEE4"/><text x="104" y="138.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">2</text><circle cx="160" cy="134" r="11" fill="#F2EEE4"/><text x="160" y="138.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">3</text><circle cx="216" cy="134" r="11" fill="#F2EEE4"/><text x="216" y="138.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">4</text><circle cx="48" cy="104" r="11" fill="#F2EEE4"/><text x="48" y="108.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">1</text><circle cx="104" cy="104" r="11" fill="#F2EEE4"/><text x="104" y="108.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">2</text><circle cx="160" cy="104" r="11" fill="#F2EEE4"/><text x="160" y="108.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">3</text><circle cx="216" cy="104" r="11" fill="#F2EEE4"/><text x="216" y="108.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">4</text><circle cx="48" cy="74" r="11" fill="#F2EEE4"/><text x="48" y="78.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">1</text><circle cx="104" cy="74" r="11" fill="#F2EEE4"/><text x="104" y="78.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">2</text><circle cx="160" cy="74" r="11" fill="#F2EEE4"/><text x="160" y="78.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">3</text><circle cx="216" cy="74" r="11" fill="#F2EEE4"/><text x="216" y="78.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">4</text><circle cx="48" cy="44" r="11" fill="#F2EEE4"/><text x="48" y="48.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">1</text><circle cx="104" cy="44" r="11" fill="#F2EEE4"/><text x="104" y="48.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">2</text><circle cx="160" cy="44" r="11" fill="#F2EEE4"/><text x="160" y="48.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">3</text><circle cx="216" cy="44" r="11" fill="#F2EEE4"/><text x="216" y="48.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">4</text><circle cx="48" cy="14" r="11" fill="#F2EEE4"/><text x="48" y="18.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">1</text><circle cx="104" cy="14" r="11" fill="#F2EEE4"/><text x="104" y="18.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">2</text><circle cx="160" cy="14" r="11" fill="#F2EEE4"/><text x="160" y="18.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">3</text><circle cx="216" cy="14" r="11" fill="#F2EEE4"/><text x="216" y="18.3" fill="#0E0A05" font-size="12" font-weight="500" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">4</text></svg><p class="viz-cap">Order 1234, frets 1&ndash;4, low string to high and back.</p>
+<!-- /GENERATED:spider -->
+    </div>
+    <!-- DRAFT for the site: the app's own words (DRILLS_BLURB and SPIDER_LINE in scales/drills.ts, approved in the app 2026-11-14), not yet approved for the page -->
+    <div class="feat-body">
+      <p>One-minute rounds, one finger per fret. Keep it steady: Sitka scores each note as it hears it.</p>
+      <p>Four frets, one finger each, across all six strings and back.</p>
+    </div>
+  </section>
+
+  <section class="feat" id="writer">
+    <p class="eyebrow">Writer</p>
+    <h2>Ever lost which chord goes over which word?</h2>
+    <div class="pair">
+      <div class="panel">
+<!-- GENERATED:writer -->
+<!-- generated by tools/build-visuals.mjs from the app at feature/more-tunings f6eeb95: createLine(text, chords), RhymeIndex.lineSyllables over assets/rhyme/words.json. Do not edit by hand; re-run the script. -->
+<div class="lyric" lang="en"><p class="lyric-line"><span class="seg"><span class="ch" aria-hidden="true">&nbsp;</span><span class="ly">ZZ&nbsp;</span></span><span class="seg"><span class="ch" aria-hidden="false">G</span><span class="ly">demo&nbsp;line,&nbsp;</span></span><span class="seg"><span class="ch" aria-hidden="false">Em</span><span class="ly">with&nbsp;the&nbsp;</span></span><span class="seg"><span class="ch" aria-hidden="false">C</span><span class="ly">chords&nbsp;above&nbsp;the&nbsp;</span></span><span class="seg"><span class="ch" aria-hidden="false">D</span><span class="ly">words</span></span></p><span class="syl" title="syllables">11</span></div><p class="viz-cap">A test line, not a lyric. The number is the syllable count Sitka puts beside every line.</p>
+<!-- /GENERATED:writer -->
+      </div>
+      <!-- SCREENSHOT: the song editor with ZZ test data, from store/play/phone-v2 (vc50) -->
+      <div class="ph" role="img" aria-label="Placeholder for a screenshot of the song editor">
+        <span class="ph-tag">Placeholder</span>
+        <span class="ph-title">Screenshot: Writer</span>
+        <span class="ph-what">Chords above the words, a syllable count on every line</span>
+        <span class="ph-file">store/play/phone-v2 &middot; vc50</span>
+      </div>
+    </div>
+    <div class="feat-body">
+      <p>Lyrics with chords above the words, a rhyme dictionary and a syllable count on every line.</p>
+      <p>Perform scrolls the song at your tempo.</p>
+    </div>
+  </section>
+
+  <section class="feat" id="also">
+    <p class="eyebrow">Also inside</p>
+    <div class="also">
+      <div class="panel">
         <h3>Metronome</h3>
         <p>Meters, subdivisions and tap tempo.</p>
-      </li>
-      <li class="part">
+      </div>
+      <div class="panel">
         <h3>Voice trainer</h3>
         <p>Sing to a reference note and get three numbers: time in tune, sharp or flat, and how long you took to find it.</p>
         <p>Every exercise stays inside your range.</p>
-      </li>
-    </ul>
-  </section>
-
-  <div class="divider rule" role="separator"><span></span></div>
-
-  <section class="feature wrap">
-    <p class="eyebrow">Chord voicings</p>
-    <h2>Shapes for the tuning you are actually in</h2>
-    <p>
-      Sitka generates chord shapes for whatever tuning is selected, ranks
-      them by how playable they are, and puts the ones worth learning
-      first. It searches the fretboard rather than looking anything up, so
-      there is no such thing as a tuning it has no chart for.
-    </p>
-    <p>Put a capo on and the shapes are found from the capo.</p>
-    <p>
-      Make your own tuning a semitone at a time (part of the one-time
-      unlock) and the tuner and the chord shapes both follow you into it.
-    </p>
-    <ul class="tunings">
-      <li>Standard</li><li>Drop D</li><li>DADGAD</li><li>Open G</li>
-      <li>Open D</li><li>Open C</li><li>Modal</li>
-      <li class="more">52 in all</li>
-    </ul>
-  </section>
-
-  <div class="divider rule" role="separator"><span></span></div>
-
-  <section class="feature wrap">
-    <p class="eyebrow">Explore</p>
-    <h2>Fret it, and Sitka names it</h2>
-    <p>
-      Put your fingers anywhere on the virtual neck, in any tuning, with or
-      without a capo, and Sitka tells you what chord you&rsquo;re holding:
-      slash chords and power chords included. It strums the shape back on a
-      plucked-string sound, so you hear it before you play it. Stack a few
-      and drop them into a song, or keep the ones you like in My shapes
-      (with the unlock).
-    </p>
-  </section>
-
-  <div class="divider rule" role="separator"><span></span></div>
-
-  <section class="feature wrap">
-    <p class="eyebrow">Capo</p>
-    <h2>Play G. Hear B&flat;.</h2>
-    <p>
-      A capo changes which shapes are easy. Set one and every chord in Sitka
-      is drawn from it: in the chord browser, in your songs and in Perform.
-      Switch between the shape you play and the chord that sounds. And if a
-      song is full of barre chords, Sitka suggests where the capo should go.
-    </p>
-  </section>
-
-  <div class="divider rule" role="separator"><span></span></div>
-
-  <!--
-    The top three for G in standard tuning, with the scores and the
-    qualities the ranker gives them. Verbatim output of:
-      npm run voicings:compare -- --chord G --a Standard --b Standard --top 3
-    Scores are whatever scoreOf returns; this page does not reach into
-    that function, it prints what the tool prints.
-  -->
-  <section class="feature wide">
-    <p class="eyebrow">What "ranked" means</p>
-    <h2>Three ways to play G. They are not equal.</h2>
-    <p class="lede-wide">
-      Every chart gives you a shape. Sitka gives you the ones worth
-      learning first, and says why: open strings ring longer than
-      stopped ones, the root in the bass sounds like the chord you
-      asked for, and fewer fingers means you can change to it in time.
-    </p>
-    <div class="rankrow">
-        <figure class="rank-item">
-          <span class="rank-n">1</span>
-          <svg viewBox="0 0 140 140" role="img" aria-label="G in standard tuning, ranked 1: 3-2-0-0-0-3">
-  <g fill="none" stroke="#8AA08D" stroke-width="1.5"><circle cx="60" cy="18" r="4"/><circle cx="80" cy="18" r="4"/><circle cx="100" cy="18" r="4"/></g>
-  <rect x="18" y="28" width="104" height="4" fill="#C8D2B4"/>
-  <g stroke="#1C5949" stroke-width="1"><line x1="20" y1="56" x2="120" y2="56"/><line x1="20" y1="82" x2="120" y2="82"/><line x1="20" y1="108" x2="120" y2="108"/><line x1="20" y1="134" x2="120" y2="134"/></g>
-  <g stroke="#4E6B5E" stroke-width="1"><line x1="20" y1="32" x2="20" y2="134"/><line x1="40" y1="32" x2="40" y2="134"/><line x1="60" y1="32" x2="60" y2="134"/><line x1="80" y1="32" x2="80" y2="134"/><line x1="100" y1="32" x2="100" y2="134"/><line x1="120" y1="32" x2="120" y2="134"/></g>
-  <g fill="#C88B4E"><circle cx="20" cy="95" r="7"/><circle cx="40" cy="69" r="7"/><circle cx="120" cy="95" r="7"/></g>
-        </svg>
-          <p class="fret-shape">3-2-0-0-0-3</p>
-          <p class="rank-score"><span>58</span> score</p>
-          <p class="fret-meta">root in bass · 3 open</p>
-          <p class="fret-gloss">G B D G B G</p>
-        </figure>
-
-        <figure class="rank-item">
-          <span class="rank-n">2</span>
-          <svg viewBox="0 0 140 140" role="img" aria-label="G in standard tuning, ranked 2: 3-2-0-0-0-x">
-  <g fill="none" stroke="#8AA08D" stroke-width="1.5"><circle cx="60" cy="18" r="4"/><circle cx="80" cy="18" r="4"/><circle cx="100" cy="18" r="4"/><path d="M116 14 L124 22 M124 14 L116 22"/></g>
-  <rect x="18" y="28" width="104" height="4" fill="#C8D2B4"/>
-  <g stroke="#1C5949" stroke-width="1"><line x1="20" y1="56" x2="120" y2="56"/><line x1="20" y1="82" x2="120" y2="82"/><line x1="20" y1="108" x2="120" y2="108"/><line x1="20" y1="134" x2="120" y2="134"/></g>
-  <g stroke="#4E6B5E" stroke-width="1"><line x1="20" y1="32" x2="20" y2="134"/><line x1="40" y1="32" x2="40" y2="134"/><line x1="60" y1="32" x2="60" y2="134"/><line x1="80" y1="32" x2="80" y2="134"/><line x1="100" y1="32" x2="100" y2="134"/><line x1="120" y1="32" x2="120" y2="134"/></g>
-  <g fill="#C88B4E"><circle cx="20" cy="95" r="7"/><circle cx="40" cy="69" r="7"/></g>
-        </svg>
-          <p class="fret-shape">3-2-0-0-0-x</p>
-          <p class="rank-score"><span>55</span> score</p>
-          <p class="fret-meta">root in bass · 3 open</p>
-          <p class="fret-gloss">G B D G B ·</p>
-        </figure>
-
-        <figure class="rank-item">
-          <span class="rank-n">3</span>
-          <svg viewBox="0 0 140 140" role="img" aria-label="G in standard tuning, ranked 3: 3-2-0-0-3-3">
-  <g fill="none" stroke="#8AA08D" stroke-width="1.5"><circle cx="60" cy="18" r="4"/><circle cx="80" cy="18" r="4"/></g>
-  <rect x="18" y="28" width="104" height="4" fill="#C8D2B4"/>
-  <g stroke="#1C5949" stroke-width="1"><line x1="20" y1="56" x2="120" y2="56"/><line x1="20" y1="82" x2="120" y2="82"/><line x1="20" y1="108" x2="120" y2="108"/><line x1="20" y1="134" x2="120" y2="134"/></g>
-  <g stroke="#4E6B5E" stroke-width="1"><line x1="20" y1="32" x2="20" y2="134"/><line x1="40" y1="32" x2="40" y2="134"/><line x1="60" y1="32" x2="60" y2="134"/><line x1="80" y1="32" x2="80" y2="134"/><line x1="100" y1="32" x2="100" y2="134"/><line x1="120" y1="32" x2="120" y2="134"/></g>
-  <g fill="#C88B4E"><circle cx="20" cy="95" r="7"/><circle cx="40" cy="69" r="7"/><circle cx="100" cy="95" r="7"/><circle cx="120" cy="95" r="7"/></g>
-        </svg>
-          <p class="fret-shape">3-2-0-0-3-3</p>
-          <p class="rank-score"><span>53</span> score</p>
-          <p class="fret-meta">root in bass · 2 open</p>
-          <p class="fret-gloss">G B D G D G</p>
-        </figure>
+      </div>
     </div>
-    <p class="verdict">
-      Five points between first and third &mdash; one open string, and one
-      finger.
-    </p>
   </section>
 
-
-
-  <div class="divider rule" role="separator"><span></span></div>
-
-  <section class="feature wrap">
-    <p class="eyebrow">The tuner</p>
-    <h2>Built to be right, not to look busy</h2>
-    <p>
-      Pitch detection on the YIN algorithm, verified against reference
-      tones. It reads a low E as a low E instead of flipping an octave,
-      stays quiet between plucks in a noisy room, and reads the sample
-      rate from your phone's hardware rather than assuming it — the
-      shortcut that leaves some tuners consistently sharp on some phones.
-    </p>
-    <p>
-      Choose an arc or a straight bar, or both. It ignores mains hum and the
-      tail of a dying note, and if you play the wrong string it tells you
-      which note it heard.
-    </p>
-    <p>
-      Play the guitar and it will capture the tuning you have already found
-      by ear, string by string (part of the unlock).
-    </p>
-  </section>
-
-  <div class="divider rule" role="separator"><span></span></div>
-
-  <!--
-    Counts and names from byCategory() over src/features/tuner/
-    tuningLibrary.ts, which is the source of truth for every tuning in
-    the app. Reproduce with:
-      node -e byCategory() over src/features/tuner/tuningLibrary.ts
-    The bars are proportional to the counts; they are not a measurement
-    of anything else.
-  -->
-  <section class="feature wide">
-    <p class="eyebrow">The library</p>
-    <h2>Fifty-two, and they come in families</h2>
-    <p class="lede-wide">
-      Fifty-two is a number. This is the shape of it &mdash; and why the open
-      tunings are the biggest group, because that is where most of the
-      interesting ones live.
-    </p>
-    <div class="families">
-        <div class="fam">
-          <p class="fam-name">Standard &amp; shifts</p>
-          <div class="fam-bar" style="--n:42.11%">
-            <span class="fam-count">8</span>
-          </div>
-          <p class="fam-list">Standard, F, E♭, D, C♯, C, B, A</p>
-        </div>
-
-        <div class="fam">
-          <p class="fam-name">Dropped</p>
-          <div class="fam-bar" style="--n:47.37%">
-            <span class="fam-count">9</span>
-          </div>
-          <p class="fam-list">Drop D, Double Drop D, Drop E♭, Drop C, Double Drop C, Drop C♯, B, B♭, A</p>
-        </div>
-
-        <div class="fam">
-          <p class="fam-name">Open</p>
-          <div class="fam-bar" style="--n:100.00%">
-            <span class="fam-count">19</span>
-          </div>
-          <p class="fam-list">D, Dm, D6, E♭, E, Em, G, Gm, G6, A, Am, C, Cm, C6, F, Fm, C&nbsp;F&nbsp;C&nbsp;F&nbsp;A&nbsp;F, B, Bm</p>
-        </div>
-
-        <div class="fam">
-          <p class="fam-name">Modal</p>
-          <div class="fam-bar" style="--n:57.89%">
-            <span class="fam-count">11</span>
-          </div>
-          <p class="fam-list">DADGAD, Orkney, Sawmill, D&nbsp;G&nbsp;C&nbsp;G&nbsp;C&nbsp;D, Dsus2, Csus2, D&nbsp;A&nbsp;D&nbsp;E&nbsp;A&nbsp;D, Gsus2, Asus2, Asus4, C5</p>
-        </div>
-
-        <div class="fam">
-          <p class="fam-name">Other</p>
-          <div class="fam-bar" style="--n:26.32%">
-            <span class="fam-count">5</span>
-          </div>
-          <p class="fam-list">All Fourths, Major Thirds, Tritones, C&nbsp;G&nbsp;C&nbsp;F&nbsp;C&nbsp;E, C&nbsp;G&nbsp;D&nbsp;G&nbsp;B&nbsp;D</p>
-        </div>
-    </div>
-    <p class="verdict">And up to 20 of your own with the unlock, a semitone at a time, if none of them is yours.</p>
-  </section>
-
-  <div class="divider rule" role="separator"><span></span></div>
-
-  <section class="feature wrap">
-    <p class="eyebrow">Songwriting</p>
-    <h2>Somewhere to put the song</h2>
-    <p>
-      A writing side that knows what key you are in: diatonic chords with
-      roman numerals, borrowed chords when you want the surprise, and a
-      rhyme dictionary that ranks by sound rather than spelling. Chords sit
-      above the words, where you put them.
-    </p>
-    <ul class="mark-list">
-      <li>Perform mode with a count-in.</li>
-      <li>A capo per song, with suggestions.</li>
-      <li>Export as ChordPro or plain text, whenever you like.</li>
-    </ul>
+  <!-- CALL TO ACTION, after the features. DRAFT line. -->
+  <section class="call">
+    <h2>Pick a tuning once. Everything works in it.</h2>
+    <a class="cta" href="https://play.google.com/store/apps/details?id=com.woodyb.sitka">Get it on Google Play</a>
+    <p class="act-note">Free: tuner, all 52 tunings, metronome and songwriting.</p>
   </section>
 
   <div class="divider rule" role="separator"><span></span></div>
@@ -631,9 +509,9 @@
     Unlock lists are the owner's brief (2026-11-22); keep them in step with
     GATED and ALWAYS_FREE in the app's src/entitlement.ts, and Pro with
     PRO_GATED. No prices: the store localises them, and Pro has none yet.
-    DRAFT words, not yet approved.
+    No amp or interface pictures until they exist. DRAFT words, not yet approved.
   -->
-  <section class="feature wide" id="pricing">
+  <section class="sect" id="pricing">
     <p class="eyebrow">What it costs</p>
     <h2>Free to use, one unlock if you want more</h2>
     <div class="tiers">
@@ -673,14 +551,14 @@
 
   <div class="divider rule" role="separator"><span></span></div>
 
-  <section class="feature wrap">
+  <section class="sect privacy" id="privacy">
     <p class="eyebrow">Privacy</p>
     <h2>It stays on your phone</h2>
     <p>
       This is not a promise about our intentions. It is a property of how
       the app is built.
     </p>
-    <div class="quiet">
+    <div class="panel">
       <ul class="mark-list">
         <li>Sitka has no servers, no account, no analytics and no ads.</li>
         <li>
@@ -703,15 +581,163 @@
         </li>
       </ul>
     </div>
-    <p class="after-panel">
+    <p>
       The full <a href="/privacy/">privacy policy</a> is short, and says the
       same thing at greater length.
     </p>
   </section>
 
-  <section class="feature closing">
-    <a class="cta" href="https://play.google.com/store/apps/details?id=com.woodyb.sitka">Available on Google Play</a>
-    <p class="cta-note">
+  <div class="divider rule" role="separator"><span></span></div>
+
+  <!--
+    THE DETAILS: the page's earlier long-form sections, kept word for word
+    and folded so the page stays skimmable. Their figures are generated too,
+    and the script fails if the ranker's answer no longer matches the words
+    written about it.
+  -->
+  <section class="sect details" id="details">
+    <p class="eyebrow">The details</p>
+    <h2>The longer version</h2>
+
+    <details>
+      <summary>G, as Sitka ranks it first in each</summary>
+      <div class="body">
+        <p>
+          Not transposed and not a capo trick. The fretboard is a different
+          instrument under each tuning, so the search runs again from
+          scratch &mdash; and the same six strings go from needing three
+          fingers to needing none. The notes underneath each diagram change
+          too: in DADGAD the low D stays put and G arrives as an inversion.
+        </p>
+<!-- GENERATED:four -->
+<!-- generated by tools/build-visuals.mjs from the app at feature/more-tunings f6eeb95: findVoicings(G, resolveTuning(name))[0] for four tunings. Do not edit by hand; re-run the script. -->
+<div class="minirow four"><figure class="mini"><figcaption><span class="mini-name">Open G</span><span class="mini-sub">D G D G B D</span></figcaption><svg class="viz chord" viewBox="0 0 140 150" width="140" height="150" role="img" aria-labelledby="v-25-t v-25-d" xmlns="http://www.w3.org/2000/svg"><title id="v-25-t">G in Open G</title><desc id="v-25-d">Frets low string to high: x-0-0-0-0-0. Root notes copper, other chord tones cream.</desc><path d="M20 14l8 8m0 -8l-8 8" stroke="#B8A693" stroke-width="1.6" fill="none"/><circle cx="43" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><circle cx="62" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><circle cx="81" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><circle cx="100" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><circle cx="119" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><rect x="22" y="29" width="99" height="4" fill="#C8D2B4"/><line x1="24" y1="59" x2="119" y2="59" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="86" x2="119" y2="86" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="113" x2="119" y2="113" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="140" x2="119" y2="140" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="32" x2="24" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="43" y1="32" x2="43" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="62" y1="32" x2="62" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="81" y1="32" x2="81" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="100" y1="32" x2="100" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="119" y1="32" x2="119" y2="140" stroke="#657A6D" stroke-width="1.2"/></svg><p class="mini-shape">x-0-0-0-0-0</p><p class="mini-meta">none · · G D G B D</p><p class="mini-gloss">Strum it. No hand on the neck at all.</p></figure><figure class="mini"><figcaption><span class="mini-name">DADGAD</span><span class="mini-sub">D A D G A D</span></figcaption><svg class="viz chord" viewBox="0 0 140 150" width="140" height="150" role="img" aria-labelledby="v-26-t v-26-d" xmlns="http://www.w3.org/2000/svg"><title id="v-26-t">G in DADGAD</title><desc id="v-26-d">Frets low string to high: 0-2-0-0-2-0. Root notes copper, other chord tones cream.</desc><circle cx="24" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><circle cx="62" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><circle cx="81" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><circle cx="119" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><rect x="22" y="29" width="99" height="4" fill="#C8D2B4"/><line x1="24" y1="59" x2="119" y2="59" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="86" x2="119" y2="86" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="113" x2="119" y2="113" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="140" x2="119" y2="140" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="32" x2="24" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="43" y1="32" x2="43" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="62" y1="32" x2="62" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="81" y1="32" x2="81" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="100" y1="32" x2="100" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="119" y1="32" x2="119" y2="140" stroke="#657A6D" stroke-width="1.2"/><circle cx="43" cy="72.5" r="7" fill="#F2EEE4"/><circle cx="100" cy="72.5" r="7" fill="#F2EEE4"/></svg><p class="mini-shape">0-2-0-0-2-0</p><p class="mini-meta">two · D B D G B D</p><p class="mini-gloss">Two fingers, and the drone stays in the bass.</p></figure><figure class="mini"><figcaption><span class="mini-name">Standard</span><span class="mini-sub">E A D G B E</span></figcaption><svg class="viz chord" viewBox="0 0 140 150" width="140" height="150" role="img" aria-labelledby="v-27-t v-27-d" xmlns="http://www.w3.org/2000/svg"><title id="v-27-t">G in Standard</title><desc id="v-27-d">Frets low string to high: 3-2-0-0-0-3. Root notes copper, other chord tones cream.</desc><circle cx="62" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><circle cx="81" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><circle cx="100" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><rect x="22" y="29" width="99" height="4" fill="#C8D2B4"/><line x1="24" y1="59" x2="119" y2="59" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="86" x2="119" y2="86" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="113" x2="119" y2="113" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="140" x2="119" y2="140" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="32" x2="24" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="43" y1="32" x2="43" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="62" y1="32" x2="62" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="81" y1="32" x2="81" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="100" y1="32" x2="100" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="119" y1="32" x2="119" y2="140" stroke="#657A6D" stroke-width="1.2"/><circle cx="24" cy="99.5" r="7" fill="#C88B4E"/><circle cx="43" cy="72.5" r="7" fill="#F2EEE4"/><circle cx="119" cy="99.5" r="7" fill="#C88B4E"/></svg><p class="mini-shape">3-2-0-0-0-3</p><p class="mini-meta">three · G B D G B G</p><p class="mini-gloss">The shape everyone learns first.</p></figure><figure class="mini"><figcaption><span class="mini-name">Drop D</span><span class="mini-sub">D A D G B E</span></figcaption><svg class="viz chord" viewBox="0 0 140 150" width="140" height="150" role="img" aria-labelledby="v-28-t v-28-d" xmlns="http://www.w3.org/2000/svg"><title id="v-28-t">G in Drop D</title><desc id="v-28-d">Frets low string to high: 5-2-0-0-0-3. Root notes copper, other chord tones cream.</desc><circle cx="62" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><circle cx="81" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><circle cx="100" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><text x="12" y="49.5" fill="#A68E74" font-size="11" text-anchor="middle" font-family="Poppins, ui-sans-serif, system-ui, sans-serif">2</text><line x1="24" y1="32" x2="119" y2="32" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="59" x2="119" y2="59" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="86" x2="119" y2="86" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="113" x2="119" y2="113" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="140" x2="119" y2="140" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="32" x2="24" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="43" y1="32" x2="43" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="62" y1="32" x2="62" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="81" y1="32" x2="81" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="100" y1="32" x2="100" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="119" y1="32" x2="119" y2="140" stroke="#657A6D" stroke-width="1.2"/><circle cx="24" cy="126.5" r="7" fill="#C88B4E"/><circle cx="43" cy="45.5" r="7" fill="#F2EEE4"/><circle cx="119" cy="72.5" r="7" fill="#C88B4E"/></svg><p class="mini-shape">5-2-0-0-0-3</p><p class="mini-meta">three · G B D G B G</p><p class="mini-gloss">The same notes, but a stretch to the fifth fret.</p></figure></div>
+<!-- /GENERATED:four -->
+        <p class="verdict">Zero shapes in common. Four different instruments.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Three ways to play G. They are not equal.</summary>
+      <div class="body">
+        <p>
+          Every chart gives you a shape. Sitka gives you the ones worth
+          learning first, and says why: open strings ring longer than
+          stopped ones, the root in the bass sounds like the chord you
+          asked for, and fewer fingers means you can change to it in time.
+        </p>
+<!-- GENERATED:ranked -->
+<!-- generated by tools/build-visuals.mjs from the app at feature/more-tunings f6eeb95: findVoicings(G, Standard, { limit: 3 }), Voicing.score, rootPosition, openStrings. Do not edit by hand; re-run the script. -->
+<div class="minirow three"><figure class="mini"><span class="rank-n">1</span><svg class="viz chord" viewBox="0 0 140 150" width="140" height="150" role="img" aria-labelledby="v-22-t v-22-d" xmlns="http://www.w3.org/2000/svg"><title id="v-22-t">G in Standard, ranked 1</title><desc id="v-22-d">Frets low string to high: 3-2-0-0-0-3. Root notes copper, other chord tones cream.</desc><circle cx="62" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><circle cx="81" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><circle cx="100" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><rect x="22" y="29" width="99" height="4" fill="#C8D2B4"/><line x1="24" y1="59" x2="119" y2="59" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="86" x2="119" y2="86" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="113" x2="119" y2="113" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="140" x2="119" y2="140" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="32" x2="24" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="43" y1="32" x2="43" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="62" y1="32" x2="62" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="81" y1="32" x2="81" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="100" y1="32" x2="100" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="119" y1="32" x2="119" y2="140" stroke="#657A6D" stroke-width="1.2"/><circle cx="24" cy="99.5" r="7" fill="#C88B4E"/><circle cx="43" cy="72.5" r="7" fill="#F2EEE4"/><circle cx="119" cy="99.5" r="7" fill="#C88B4E"/></svg><p class="mini-shape">3-2-0-0-0-3</p><p class="rank-score"><span>58</span> score</p><p class="mini-meta">root in bass · 3 open</p><p class="mini-meta">G B D G B G</p></figure><figure class="mini"><span class="rank-n">2</span><svg class="viz chord" viewBox="0 0 140 150" width="140" height="150" role="img" aria-labelledby="v-23-t v-23-d" xmlns="http://www.w3.org/2000/svg"><title id="v-23-t">G in Standard, ranked 2</title><desc id="v-23-d">Frets low string to high: 3-2-0-0-0-x. Root notes copper, other chord tones cream.</desc><circle cx="62" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><circle cx="81" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><circle cx="100" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><path d="M115 14l8 8m0 -8l-8 8" stroke="#B8A693" stroke-width="1.6" fill="none"/><rect x="22" y="29" width="99" height="4" fill="#C8D2B4"/><line x1="24" y1="59" x2="119" y2="59" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="86" x2="119" y2="86" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="113" x2="119" y2="113" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="140" x2="119" y2="140" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="32" x2="24" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="43" y1="32" x2="43" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="62" y1="32" x2="62" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="81" y1="32" x2="81" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="100" y1="32" x2="100" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="119" y1="32" x2="119" y2="140" stroke="#657A6D" stroke-width="1.2"/><circle cx="24" cy="99.5" r="7" fill="#C88B4E"/><circle cx="43" cy="72.5" r="7" fill="#F2EEE4"/></svg><p class="mini-shape">3-2-0-0-0-x</p><p class="rank-score"><span>55</span> score</p><p class="mini-meta">root in bass · 3 open</p><p class="mini-meta">G B D G B ·</p></figure><figure class="mini"><span class="rank-n">3</span><svg class="viz chord" viewBox="0 0 140 150" width="140" height="150" role="img" aria-labelledby="v-24-t v-24-d" xmlns="http://www.w3.org/2000/svg"><title id="v-24-t">G in Standard, ranked 3</title><desc id="v-24-d">Frets low string to high: 3-2-0-0-3-3. Root notes copper, other chord tones cream.</desc><circle cx="62" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><circle cx="81" cy="18" r="4.2" stroke="#B8A693" stroke-width="1.6" fill="none"/><rect x="22" y="29" width="99" height="4" fill="#C8D2B4"/><line x1="24" y1="59" x2="119" y2="59" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="86" x2="119" y2="86" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="113" x2="119" y2="113" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="140" x2="119" y2="140" stroke="#8A5A32" stroke-width="1.2"/><line x1="24" y1="32" x2="24" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="43" y1="32" x2="43" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="62" y1="32" x2="62" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="81" y1="32" x2="81" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="100" y1="32" x2="100" y2="140" stroke="#657A6D" stroke-width="1.2"/><line x1="119" y1="32" x2="119" y2="140" stroke="#657A6D" stroke-width="1.2"/><circle cx="24" cy="99.5" r="7" fill="#C88B4E"/><circle cx="43" cy="72.5" r="7" fill="#F2EEE4"/><circle cx="100" cy="99.5" r="7" fill="#F2EEE4"/><circle cx="119" cy="99.5" r="7" fill="#C88B4E"/></svg><p class="mini-shape">3-2-0-0-3-3</p><p class="rank-score"><span>53</span> score</p><p class="mini-meta">root in bass · 2 open</p><p class="mini-meta">G B D G D G</p></figure></div>
+<!-- /GENERATED:ranked -->
+        <p class="verdict">Five points between first and third &mdash; one open string, and one finger.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Shapes for the tuning you are actually in</summary>
+      <div class="body">
+        <p>
+          Sitka generates chord shapes for whatever tuning is selected, ranks
+          them by how playable they are, and puts the ones worth learning
+          first. It searches the fretboard rather than looking anything up, so
+          there is no such thing as a tuning it has no chart for.
+        </p>
+        <p>Put a capo on and the shapes are found from the capo.</p>
+        <p>
+          Make your own tuning a semitone at a time (part of the one-time
+          unlock) and the tuner and the chord shapes both follow you into it.
+        </p>
+        <ul class="chips">
+          <li class="chip">Standard</li><li class="chip">Drop D</li><li class="chip">DADGAD</li><li class="chip">Open G</li>
+          <li class="chip">Open D</li><li class="chip">Open C</li><li class="chip">Modal</li>
+          <li class="chip">52 in all</li>
+        </ul>
+      </div>
+    </details>
+
+    <details>
+      <summary>Fifty-two, and they come in families</summary>
+      <div class="body">
+        <p>
+          Fifty-two is a number. The chart under the Tuner above is the shape
+          of it &mdash; and why the open tunings are the biggest group,
+          because that is where most of the interesting ones live.
+        </p>
+        <p class="verdict">And up to 20 of your own with the unlock, a semitone at a time, if none of them is yours.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Fret it, and Sitka names it</summary>
+      <div class="body">
+        <p>
+          Put your fingers anywhere on the virtual neck, in any tuning, with or
+          without a capo, and Sitka tells you what chord you&rsquo;re holding:
+          slash chords and power chords included. It strums the shape back on a
+          plucked-string sound, so you hear it before you play it. Stack a few
+          and drop them into a song, or keep the ones you like in My shapes
+          (with the unlock).
+        </p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Play G. Hear B&flat;.</summary>
+      <div class="body">
+        <p>
+          A capo changes which shapes are easy. Set one and every chord in Sitka
+          is drawn from it: in the chord browser, in your songs and in Perform.
+          Switch between the shape you play and the chord that sounds. And if a
+          song is full of barre chords, Sitka suggests where the capo should go.
+        </p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Built to be right, not to look busy</summary>
+      <div class="body">
+        <p>
+          Pitch detection on the YIN algorithm, verified against reference
+          tones. It reads a low E as a low E instead of flipping an octave,
+          stays quiet between plucks in a noisy room, and reads the sample
+          rate from your phone's hardware rather than assuming it — the
+          shortcut that leaves some tuners consistently sharp on some phones.
+        </p>
+        <p>
+          Choose an arc or a straight bar, or both. It ignores mains hum and the
+          tail of a dying note, and if you play the wrong string it tells you
+          which note it heard.
+        </p>
+        <p>
+          Play the guitar and it will capture the tuning you have already found
+          by ear, string by string (part of the unlock).
+        </p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Somewhere to put the song</summary>
+      <div class="body">
+        <p>
+          A writing side that knows what key you are in: diatonic chords with
+          roman numerals, borrowed chords when you want the surprise, and a
+          rhyme dictionary that ranks by sound rather than spelling. Chords sit
+          above the words, where you put them.
+        </p>
+        <ul class="mark-list">
+          <li>Perform mode with a count-in.</li>
+          <li>A capo per song, with suggestions.</li>
+          <li>Export as ChordPro or plain text, whenever you like.</li>
+        </ul>
+      </div>
+    </details>
+  </section>
+
+  <!-- CALL TO ACTION, at the bottom. Same button, same words. -->
+  <section class="call">
+    <a class="cta" href="https://play.google.com/store/apps/details?id=com.woodyb.sitka">Get it on Google Play</a>
+    <p class="act-note">
       Free: tuner, all 52 tunings, metronome and songwriting.
       One <a href="#pricing">optional unlock</a>; no subscription, no ads, no account.
     </p>
