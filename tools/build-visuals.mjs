@@ -3,10 +3,10 @@
  * the Sitka app's own modules. Nothing in an illustration is drawn by hand.
  *
  *   git -C ../guitar-tuner fetch origin
- *   node --experimental-strip-types tools/build-visuals.mjs [--repo ../guitar-tuner] [--ref origin/feature/pro] [--check]
+ *   node --experimental-strip-types tools/build-visuals.mjs [--repo ../guitar-tuner] [--ref origin/release/46] [--check]
  *   node --experimental-strip-types tools/build-visuals.mjs --app <a checkout>        # a working tree instead
  *
- * By default it reads the app at a git ref of the main repo — origin/feature/pro
+ * By default it reads the app at a git ref of the main repo — origin/release/46 (what 1.46 ships)
  * after a fetch — by `git archive` into a temporary folder, so no branch and
  * no working tree is changed, and the figures come from the commit named
  * rather than from whatever a checkout happens to hold. Fetching is left to
@@ -54,7 +54,7 @@ const argOf = (n, d) => { const i = argv.indexOf(`--${n}`); return i < 0 ? d : a
 const CHECK = argv.includes('--check');
 const APP_DIR = argOf('app', null);
 const REPO = path.resolve(SITE, argOf('repo', '../guitar-tuner'));
-const REF = argOf('ref', 'origin/feature/pro');
+const REF = argOf('ref', 'origin/release/46');
 const git = (args, cwd) => execSync(`git ${args}`, { cwd, stdio: ['ignore', 'pipe', 'pipe'] }).toString().trim();
 
 let APP, appCommit;
@@ -95,7 +95,7 @@ const { createLine } = await imp('src/features/songwriter/songModel.ts');
 const { createRhymeIndex } = await imp('src/features/songwriter/rhyme.ts');
 
 const fail = (msg) => { console.error(`build-visuals: ${msg}`); process.exit(1); };
-if (typeof spellNote !== 'function') fail('the app has no spellNote (theory.ts): it predates STUDY spelling notes by degree; build from origin/feature/pro');
+if (typeof spellNote !== 'function') fail('the app has no spellNote (theory.ts): it predates STUDY spelling notes by degree; build from origin/release/46');
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const r1 = (n) => Math.round(n * 10) / 10;
 

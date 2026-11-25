@@ -8,7 +8,7 @@ dependencies — edit a file, commit, and it is live in a minute or two.
 
 The illustrations are the one exception, and they are generated *before*
 commit, not at deploy: `tools/build-visuals.mjs` imports the Sitka app's
-own modules — by default `origin/feature/pro` of the main repo
+own modules — by default `origin/release/46` (what 1.46 ships) of the main repo
 (`../guitar-tuner`), read with `git archive` so no branch or working tree
 is touched — and rewrites the blocks in
 `index.html` between `<!-- GENERATED:name -->` markers. Nothing in a
