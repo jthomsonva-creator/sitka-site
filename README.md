@@ -66,9 +66,17 @@ figures read their colours from the app at build time. Run
 
 ## Images
 
-The page carries placeholders, not screenshots: the hero's screen
-recording (the owner's own footage) and three phone shots, to come from
-the vc50 store set (`store/play/phone-v2` in the app repo, never vc49).
-The vc27 screens in `assets/screen-*.webp` are no longer on the page. `assets/og.png` (1200x630) is
-the link preview. Give every `<img>` its real `width` and `height` so the
-page does not shift as images load.
+The hero is the Play v2 hero scene (`store/play/make-feature-graphic-v2-hero.mjs`
+on `store/play-v2` in the app repo) rendered **without** its type, so the
+headline and tagline stay live text: `assets/hero/hero-2400.webp` (and
+`hero-1440`) is the script's 2400x1000 web crop, `hero-phone-800.webp` an
+800x1000 crop of it centred on the phone, served below 860px. Never use the
+store's `feature-graphic-v2-hero-web.png` itself: its tagline is baked in.
+
+The eight phone shots, `assets/shots/v3-<n>-<name>.webp` (600x1228), are the
+Play v2 raw captures (Sitka 1.46.0 (51) from Play, Pixel 8), cropped 1080x2210
+from y 120 like the framed store set, and framed by the page's own `.shot`
+style, one or two per feature. The vc27 screens in `assets/screen-*.webp` are
+no longer on the page. `assets/og.png` (1200x630) is the link preview. Give
+every `<img>` its real `width` and `height` so the page does not shift as
+images load.
