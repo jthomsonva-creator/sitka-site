@@ -38,6 +38,7 @@ if (Math.abs(c1 - 4.48) > 0.01 || Math.abs(c2 - 21) > 0.01) { console.error(`con
 
 const v = (n) => { if (!T[n]) throw new Error(`no --${n} in site.css`); return T[n]; };
 const BG = { ground: v('ground'), lift: v('lift'), surface: v('surface'), raise: v('raise'), copper: v('copper') };
+BG.selected = over(v('selected'), v('ground')); // a translucent fill: measured as it lands on the page
 
 // [what, foreground token or colour, background name, need]
 const PAIRS = [
@@ -49,6 +50,7 @@ const PAIRS = [
   ['patina text (privacy page date line)', 'patina', ['ground'], 4.5],
   ['button / tag / placeholder-tag label on copper', 'ground', ['copper'], 4.5],
   ['button hover: ground on ink', 'ground', ['ink'], 4.5],
+  ['outline button hover label (Send feedback): ink on the selected fill', 'ink', ['selected'], 4.5],
   // graphics (3:1)
   ['primary button fill against the page', 'copper', ['ground', 'lift'], 3],
   ['chip and syllable-badge border (hair-lit)', 'hair-lit', ['ground', 'surface'], 3, 'chips are labels, not controls; their text carries them (ink-dim)'],
